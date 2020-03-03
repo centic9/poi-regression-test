@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/centic9/poi-regression-test.svg)](https://travis-ci.org/centic9/poi-regression-test) 
 [![Gradle Status](https://gradleupdate.appspot.com/centic9/poi-regression-test/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/poi-regression-test/status)
-[![Release](https://img.shields.io/github/release/centic9/poi-regression-test.svg)](https://github.com/centic9/poi-regression-test/releases)
 
 This is a tool used to perform regression testing for Apache POI on a very large corpus of test-files.
 
@@ -79,7 +78,7 @@ opens files according to their file-type and performs a number of actions on the
 See https://github.com/apache/poi/blob/trunk/src/integrationtest/org/apache/poi/TestAllFiles.java for
 these tests. 
 
-This can adjusted for other projects which work with other types of files as long as there is an easy 
+This can be adjusted for other projects which work with other types of files as long as there is an easy 
 way to run tests on a certain file.  
 
 ## Export to Elasticsearch
