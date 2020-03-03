@@ -1,0 +1,28 @@
+{
+  "template": "poiregression*",
+  "order" : 1,
+  "settings": {
+    "index": {
+      "number_of_replicas": 0,
+      "number_of_shards": 3,
+      "refresh_interval": "30s"
+    }
+  },
+  "mappings": {
+    "_default_": {
+      "dynamic_templates": [
+        {
+          "strings": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping":   { "type": "keyword" }
+          }
+        }
+      ],
+      "_source": { "enabled": true },
+      "properties": {
+        "created": { "type": "date", "format": "epoch_millis" }
+      }
+    }
+  }
+}

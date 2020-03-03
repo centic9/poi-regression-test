@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    version="2.0">
+
+    <persistence-unit name="commoncrawl" transaction-type="RESOURCE_LOCAL">
+        <class>org.dstadler.commoncrawl.jpa.FileURL</class>
+        <class>org.dstadler.commoncrawl.jpa.POIStatus</class>
+
+        <properties>
+            <property name="openjpa.ConnectionProperties"
+                value="DriverClassName=org.apache.derby.jdbc.ClientDriver,
+                  Url=jdbc:derby://localhost:11527/CommonCrawl;create=true,
+                  MaxActive=100,
+                  MaxWait=10000,
+                  TestOnBorrow=true"/>
+            <property name="openjpa.ConnectionDriverName"
+                value="org.apache.commons.dbcp2.BasicDataSource"/>
+			<property name="openjpa.jdbc.DBDictionary" value="batchLimit=1000"/>
+
+            <property name="openjpa.jdbc.SynchronizeMappings"
+                value="buildSchema"/>
+            <property name="openjpa.Log"
+                value="DefaultLevel=INFO,SQL=INFO"/>
+
+			<!-- Create foreign-keys for new tables -->
+			<property name="openjpa.jdbc.MappingDefaults"
+				value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict"/>
+
+			<!-- avoid large detachments at the end -->
+			<property name="openjpa.AutoDetach" value="commit,close,nontx-read"/>
+            <!-- property name="openjpa.RuntimeUnenhancedClasses" value="supported"/ -->
+        </properties>
+    </persistence-unit>
+
+
+    <persistence-unit name="commoncrawltest" transaction-type="RESOURCE_LOCAL">
+        <class>org.dstadler.commoncrawl.jpa.FileURL</class>
+        <class>org.dstadler.commoncrawl.jpa.POIStatus</class>
+
+        <properties>
+            <property name="openjpa.ConnectionProperties"
+                value="DriverClassName=org.apache.derby.jdbc.ClientDriver,
+                  Url=jdbc:derby://localhost:11527/TestCommonCrawl;create=true,
+                  MaxActive=100,
+                  MaxWait=10000,
+                  TestOnBorrow=true"/>
+            <property name="openjpa.ConnectionDriverName"
+                value="org.apache.commons.dbcp2.BasicDataSource"/>
+
+            <property name="openjpa.jdbc.SynchronizeMappings"
+                value="buildSchema"/>
+            <property name="openjpa.Log"
+                value="DefaultLevel=INFO,SQL=INFO"/>
+
+			<!-- Create foreign-keys for new tables -->
+			<property name="openjpa.jdbc.MappingDefaults"
+				value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict"/>
+
+            <!-- property name="openjpa.RuntimeUnenhancedClasses" value="supported"/ -->
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,23 @@
+.classpath
+.gradle/
+.project
+bin/
+build/
+TestCommonCrawl/
+CommonCrawl/
+derby.log
+CommonCrawl.log
+/result-*.json
+
+## Directory-based project format:
+.idea/
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+*.iml
+
+/velocity.log
+/output.txt
+
