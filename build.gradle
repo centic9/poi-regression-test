@@ -67,7 +67,7 @@ sourceSets {
 
 dependencies {
 	compile 'org.dstadler:commons-dost:1.0.0.30'
-	compile 'org.dstadler:commoncrawldownload:1.0.0.6'
+	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
     compile 'com.fasterxml.jackson.core:jackson-core:2.10.2'
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
 	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.10.2'
