@@ -108,8 +108,10 @@ public class BugAnnotations {
                 "com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException: Ung\u00FCltiges Byte * von *-Byte-UTF-8-Sequenz.");
         REPLACEMENTS.put(Pattern.compile("java\\.io\\.FileNotFoundException: no such entry: \"(WordDocument|VisioDocument|PowerPoint Document)\", had: \\[[-a-zA-Z0-9_ ,.#\u0001-\u0005]+]"),
                 "java.io.FileNotFoundException: no such entry: \"$1\", had: [*]");
-        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: The end \\(\\d+\\) must not be before the start \\(\\d+\\)"),
+        REPLACEMENTS.put(Pattern.compile("java\\.lang\\.IllegalArgumentException: The end \\(\\d+\\) must not be before the start \\(\\d+\\)"),
                 "java.lang.IllegalArgumentException: The end * must not be before the start *");
+        REPLACEMENTS.put(Pattern.compile("java\\.lang\\.IllegalArgumentException: Invalid cell range, having lastRow < firstRow \\|\\| lastCol < firstCol, had rows \\d+ >= \\d+ or cells \\d+ >= \\d+"),
+                "java.lang.IllegalArgumentException: Invalid cell range, having lastRow < firstRow || lastCol < firstCol, had rows * >= * or cells * >= *");
     }
 
     public static String getReplacement(String exception) {
