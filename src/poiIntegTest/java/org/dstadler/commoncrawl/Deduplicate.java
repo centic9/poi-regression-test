@@ -56,7 +56,11 @@ public class Deduplicate {
                         FileUtils.moveFile(new File(ROOT_DIR, file), new File(BACKUP_DIR, file));
                     }
 
-                hashes.put(hash, file);
+                    hashes.put(hash, file);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Could not read file, probably the filename contains unexpected characters");
+                    e.printStackTrace();
+                }
             }
         }
         System.out.println("Found " + duplicates + " duplicate files");
