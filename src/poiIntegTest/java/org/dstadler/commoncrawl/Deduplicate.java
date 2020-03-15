@@ -39,8 +39,11 @@ public class Deduplicate {
         int count = 0;
         for (Long sizesKey : sizesKeys) {
             NavigableSet<String> sizeFiles = sizes.get(sizesKey);
-            if(sizeFiles.size() == 1) {
+            if(sizeFiles.size() <= 1 /*||
+                    // used to not start at the beginning when continuing a previous run that stopped for some reason
+                    sizesKey <= 524037*/) {
                 System.out.println("Only having " + sizeFiles.size() + " files with size " + sizesKey + ", " + (sizes.size() - count) + " files left");
+                count += sizeFiles.size();
                 continue;
             }
             System.out.println("Looking at " + sizeFiles.size() + " files with size " + sizesKey + ", " + (sizes.size() - count) + " files left");
