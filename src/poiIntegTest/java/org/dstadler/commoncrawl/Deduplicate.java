@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.TestAllFiles;
 import org.apache.tools.ant.DirectoryScanner;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -83,7 +84,15 @@ public class Deduplicate {
     }
 
     private static String hash(File file) throws IOException {
-        try (InputStream fis = new FileInputStream(file)) {
+        // buffer up to one MB per file to speed up hashing
+        final int buf;
+        if(file.length() > 1024*1024) {
+            buf = 1024*1024;
+        } else {
+            buf = (int)file.length();
+        }
+
+        try (InputStream fis = new BufferedInputStream(new FileInputStream(file), buf)) {
             return org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
         }
     }
