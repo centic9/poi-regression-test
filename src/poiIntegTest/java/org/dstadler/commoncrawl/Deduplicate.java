@@ -2,14 +2,14 @@ package org.dstadler.commoncrawl;
 
 import com.google.common.collect.TreeMultimap;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.POIFileScanner;
-import org.apache.poi.stress.FileHandler;
+import org.apache.poi.TestAllFiles;
+import org.apache.tools.ant.DirectoryScanner;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NavigableSet;
@@ -24,16 +24,11 @@ import static org.dstadler.commoncrawl.ProcessFiles.ROOT_DIR;
  */
 public class Deduplicate {
     public static void main(String[] args) throws IOException {
-        Collection<Map.Entry<String, FileHandler>> files =
-                POIFileScanner.scan(ROOT_DIR);
+        System.out.println("Scanning for files in " + ROOT_DIR);
+        String[] files = scanForFiles();
+        System.out.println("Handling " + files.length + " files");
 
-        System.out.println("Handling " + files.size() + " files");
-        TreeMultimap<Long, String> sizes = TreeMultimap.create();
-
-        for (Map.Entry<String, FileHandler> file : files) {
-            String fileName = file.getKey();
-            sizes.put(new File(ROOT_DIR, fileName).length(), fileName);
-        }
+        TreeMultimap<Long, String> sizes = readFileSizes(files);
 
         //System.out.println("Having files with 2 bytes: " + sizes.get(2L));
         NavigableSet<Long> sizesKeys = sizes.keySet();
@@ -52,18 +47,35 @@ public class Deduplicate {
             Map<String, String> hashes = new HashMap<>();
             for (String file : sizeFiles) {
                 count++;
-                String hash = hash(new File(ROOT_DIR, file));
-                if(hashes.containsKey(hash)) {
-                    duplicates++;
-                    System.out.println(duplicates + "/" + count + "/" + sizesKey + ": File " + file + " is the same as " + hashes.get(hash));
+                try {
+                    String hash = hash(new File(ROOT_DIR, file));
+                    if (hashes.containsKey(hash)) {
+                        duplicates++;
+                        System.out.println(duplicates + "/" + count + "/" + sizesKey + ": File " + file + " is the same as " + hashes.get(hash));
 
-                    FileUtils.moveFile(new File(ROOT_DIR, file), new File(BACKUP_DIR, file));
-                }
+                        FileUtils.moveFile(new File(ROOT_DIR, file), new File(BACKUP_DIR, file));
+                    }
 
                 hashes.put(hash, file);
             }
         }
         System.out.println("Found " + duplicates + " duplicate files");
+    }
+
+    private static String[] scanForFiles() {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setBasedir(ROOT_DIR);
+        scanner.setExcludes(TestAllFiles.SCAN_EXCLUDES);
+        scanner.scan();
+        return scanner.getIncludedFiles();
+    }
+
+    private static TreeMultimap<Long, String> readFileSizes(String[] files) {
+        TreeMultimap<Long, String> sizes = TreeMultimap.create();
+        for (String fileName : files) {
+            sizes.put(new File(ROOT_DIR, fileName).length(), fileName);
+        }
+        return sizes;
     }
 
     private static String hash(File file) throws IOException {
