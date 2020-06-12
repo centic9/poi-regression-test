@@ -50,7 +50,8 @@ import com.google.common.base.Preconditions;
 		"exceptionStacktrace412RC1","exceptionText412RC1","poi412RC1",
 		"exceptionStacktrace412RC2","exceptionText412RC2","poi412RC2",
 		"exceptionStacktrace412RC3","exceptionText412RC3","poi412RC3",
-		"exceptionStacktrace413RC0","exceptionText413RC0","poi413RC0" })
+		"exceptionStacktrace413RC0","exceptionText413RC0","poi413RC0",
+		"exceptionStacktrace500RC0","exceptionText500RC0","poi500RC0" })
 @Entity
 public class POIStatus extends Base {
 	@JsonProperty
@@ -472,6 +473,24 @@ public class POIStatus extends Base {
 	@Basic
 	private long duration413RC0;
 
+	@JsonProperty
+	@Basic
+	private FileStatus poi500RC0;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText500RC0;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace500RC0;
+
+	@JsonProperty
+	@Basic
+	private long duration500RC0;
+
 	public POIStatus() {
 		super();
 	}
@@ -707,6 +726,14 @@ public class POIStatus extends Base {
 		this.poi413RC0 = poi413RC0;
 	}
 
+	public FileStatus getPoi500RC0() {
+		return poi500RC0;
+	}
+
+	public void setPoi500RC0(FileStatus poi500RC0) {
+		this.poi500RC0 = poi500RC0;
+	}
+
 	public void setByVersion(String version, ResultItem item) {
 		final FileStatus status;
 		if(item.isTimeout() ||
@@ -845,6 +872,11 @@ public class POIStatus extends Base {
 			exceptionText413RC0 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
 			exceptionStacktrace413RC0 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
 			duration413RC0 = item.getDuration();
+		} else if (version.contains("5.0.0-RC0")) {
+			this.poi500RC0 = status;
+			exceptionText500RC0 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace500RC0 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration500RC0 = item.getDuration();
 		} else {
 			throw new IllegalStateException("Unknown version found: " + version);
 		}
