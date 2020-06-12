@@ -45,8 +45,8 @@ memory to what is available on your machine
 * Adjust available threads in `ProcessFiles.java`, adjust it relative to how you adjust main memory
 * Adjust version of the Apache POI jar-files in `build.gradle`, look for `def poiVersion =`
 * Adjust version that should be recorded in the database in `build.gradle`, look for `def poiVersionRC =`
-* Add a new version in `POIStatus.java`, this project currently requires a new column for every new version
-to provide efficient queries for reporting
+* Add a new version in `POIStatus.java`, look for the two ways to write the version, e.g. `412` and `4.1.2`, 
+this project currently requires a new column for every new version to provide efficient queries for reporting
 * Adjust the version to report in `Report.java` in method `createReport()` 
 
 ### Run tests
