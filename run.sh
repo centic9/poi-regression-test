@@ -17,7 +17,7 @@ do
         -s*|--with-sync)
             CMD=syncReport
             ;;
-        -P*
+        -P*)
             OPT="${OPT} ${key}"
             ;;
         *)
