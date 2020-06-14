@@ -28,7 +28,7 @@ do
 done
 
 # --stacktrace
-nice -n 19 ./gradlew --no-daemon --no-parallel --info processFiles processResults report ${CMD} "${OPT}" 2>&1 | tee output.txt
+nice -n 19 ./gradlew --no-daemon --no-parallel --info ${OPT} processFiles processResults report ${CMD} 2>&1 | tee output.txt
 
 # To re-run use something like this:
 #
