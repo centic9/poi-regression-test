@@ -47,7 +47,6 @@ public final class FileHandlingRunnable implements Runnable {
     private final FileHandler fileHandler;
     private final Writer resultWriter;
     private final File rootDir;
-    private final long fileStart;
 
     public FileHandlingRunnable(long start, String file, FileHandler fileHandler, Writer resultWriter, File rootDir) {
         this.start = start;
@@ -55,11 +54,12 @@ public final class FileHandlingRunnable implements Runnable {
         this.fileHandler = checkNotNull(fileHandler, "Did not get a handler for %s", file);
         this.resultWriter = resultWriter;
         this.rootDir = rootDir;
-        this.fileStart = System.currentTimeMillis();
     }
 
     @Override
     public void run() {
+        long fileStart = System.currentTimeMillis();
+
         Thread.currentThread().setName(file);
 
         System.out.println("Running file " + file + " using " + fileHandler.getClass().getSimpleName());
