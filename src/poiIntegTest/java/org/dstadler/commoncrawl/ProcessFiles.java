@@ -48,8 +48,8 @@ public class ProcessFiles {
     }
 
     public static void main(String[] args) throws Throwable {
-        Collection<Entry<String, FileHandler>> files =
-                POIFileScanner.scan(ROOT_DIR);
+        // read all files and their matching type
+        Collection<Entry<String, FileHandler>> files = POIFileScanner.scan(ROOT_DIR);
 
         File resultFile = RESULT_FILE;
         if(args.length > 0) {
@@ -65,32 +65,41 @@ public class ProcessFiles {
             long start = System.currentTimeMillis();
 
             try {
-                // schedule memory checker
+                // schedule memory checker to stop threads when memory is low
                 memoryChecker.scheduleWithFixedDelay(new MemoryChecker(resultWriter), 5, 5, TimeUnit.SECONDS);
 
+                // create a future for each found file
                 List<Future<?>> futures = new ArrayList<>();
                 for(final Entry<String, FileHandler> pair : files) {
-                    if(EXCLUDES.contains(pair.getKey())) {
+                    String fileName = pair.getKey();
+                    if(EXCLUDES.contains(fileName)) {
                         FileHandlingRunnable.ignored.incrementAndGet();
 
                         continue;
                     }
-                    if(pair.getKey().compareTo("") <= 0) {
+                    if(fileName.compareTo("") <= 0) {
                         FileHandlingRunnable.ignored.incrementAndGet();
 
                     	continue;
                     }
-                    //new FileHandlingRunnable(start, pair.getKey(), pair.getRight(), resultWriter).run();
-                    futures.add(executor.submit(new FileHandlingRunnable(start, pair.getKey(), pair.getValue(), resultWriter, ROOT_DIR)));
+
+                    futures.add(executor.submit(new FileHandlingRunnable(start, fileName, pair.getValue(), resultWriter, ROOT_DIR)));
                 }
 
-                // free list of files as it is not needed any more now
+                // free list of files now as it is not needed any more
+                // and so we can release memory for it before actually starting
+                // to process all the entries
                 //noinspection UnusedAssignment
                 files = null;
 
-                // no new tasks expected now, trigger ordered shutdown
+                // no new tasks expected now, trigger ordered shutdown although
+                // it usually keeps executing all the scheduled jobs for quite a
+                // while longer
                 executor.shutdown();
 
+                // wait for each future to collect results and continually free entries
+                // from the list of futures as we go along to free more and more of the
+                // memory held by the list of futures over time
                 System.out.println("Collecting results from " + futures.size() + " futures");
                 Iterator<Future<?>> it = futures.iterator();
                 while(it.hasNext()) {
@@ -100,7 +109,8 @@ public class ProcessFiles {
                     handleFuture(resultWriter, future);
 
                     // remove futures that are done to free up memory, they hold full stacktraces and other
-                    // bits of information after execution
+                    // bits of information after execution and so are a good target for
+                    // memory optimization
                     it.remove();
                 }
 
@@ -126,6 +136,9 @@ public class ProcessFiles {
 
     private static final MemoryMXBean MEMORY_MX_BEAN = ManagementFactory.getMemoryMXBean();
     private static final long MEMORY_AVAILABLE = MEMORY_MX_BEAN.getHeapMemoryUsage().getMax();
+
+    // amount of memory that should be available at all times, if we have less than this
+    // the memory checker will stop the longest running thread every 5 seconds
     private static final int MEMORY_KEEP_AMOUNT = 500 * 1024 * 1024;
 
     /**
@@ -158,6 +171,8 @@ public class ProcessFiles {
     private static void handleFuture(Writer resultWriter, Future<?> future) throws InterruptedException {
         while(true) {
             try {
+                // files should be done in 1 minute, if not, we time out and
+                // stop the thread forcefully
                 future.get(1, TimeUnit.MINUTES);
 
                 // done for this future
@@ -191,11 +206,6 @@ public class ProcessFiles {
     }
 
     static void handleOOM(Writer resultWriter, OutOfMemoryError e) throws InterruptedException {
-        /*// try to handle OOM by
-        Thread.sleep(120*1000);
-
-        writeResult(resultWriter, , null, true);*/
-
         // kill the longest running futures to try to gracefully handle OutOfMemory
         Iterator<Entry<String, Pair<Long, Thread>>> iterator = FileHandlingRunnable.startTimes.entrySet().iterator();
         if(iterator.hasNext()) {
