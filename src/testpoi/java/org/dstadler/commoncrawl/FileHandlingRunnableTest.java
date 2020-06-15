@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class FileHandlingRunnableTest {
 
     @Test
-    public void testPrintInfo() throws Exception {
+    public void testPrintInfo() {
         FileHandler handler = new OPCFileHandler();
         FileHandlingRunnable runnable = new FileHandlingRunnable(100, "testfile", handler, null, null);
         runnable.printInfo(1, "some text");
