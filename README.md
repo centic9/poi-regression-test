@@ -33,10 +33,17 @@ For testing, you can use the files included in the Apache POI source repository 
 
 ### Compile Apache POI
 
-Compile the jars for Apache POI to use them as part of the test-run:
+Compile the jars for Apache POI to use them as part of the test-run.
+
+For Apache POI up to 4.1.2:
 
     cd /opt/poi
     ant jar integration-test-jar
+    
+For Apache POi since 5.0.0:
+
+    cd /opt/poi
+    ant jar compile-integration
 
 ### Set up test
 
