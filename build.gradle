@@ -68,9 +68,9 @@ sourceSets {
 dependencies {
 	compile 'org.dstadler:commons-dost:1.0.0.31'
 	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
-	compile 'com.fasterxml.jackson.core:jackson-core:2.11.2'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.11.2'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.11.3'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.11.3'
 	compile 'commons-io:commons-io:2.8.0'
 	compile 'org.apache.commons:commons-lang3:3.11'
 	compile 'com.google.code.gson:gson:2.8.6'
@@ -125,10 +125,10 @@ dependencies {
 	compile files(poiDir + '/build/dist/maven/poi-integration-test/poi-integration-test-' + poiVersion + '.jar')
 
 	// dependencies for the Integration-Test part
-	compile 'junit:junit:4.13'
-	compile 'org.apache.ant:ant:1.10.8'
+	compile 'junit:junit:4.13.1'
+	compile 'org.apache.ant:ant:1.10.9'
 
-   	testCompile 'org.dstadler:commons-test:1.0.0.18'
+   	testCompile 'org.dstadler:commons-test:1.0.0.19'
 }
 
 openjpa {
