@@ -66,7 +66,7 @@ sourceSets {
 }
 
 dependencies {
-	compile 'org.dstadler:commons-dost:1.0.0.31'
+	compile 'org.dstadler:commons-dost:1.0.0.32'
 	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
 	compile 'com.fasterxml.jackson.core:jackson-core:2.11.3'
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
@@ -140,7 +140,7 @@ openjpa {
 }
 
 wrapper {
-    gradleVersion = '5.6.4'
+    gradleVersion = '6.6.1'
 }
 
 test {
