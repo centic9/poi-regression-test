@@ -2,7 +2,7 @@ package org.dstadler.commoncrawl;
 
 import com.google.common.collect.TreeMultimap;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.TestAllFiles;
+import org.apache.poi.stress.TestAllFiles;
 import org.apache.tools.ant.DirectoryScanner;
 
 import java.io.BufferedInputStream;

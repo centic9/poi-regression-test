@@ -105,30 +105,29 @@ dependencies {
 
 	// Testing with latest trunk-POI
 
-	compile files(poiDir + '/lib/ooxml-provided/batik-all-1.12.jar')
+	compile files(poiDir + '/lib/ooxml-provided/batik-all-1.13.jar')
     compile files(poiDir + '/lib/ooxml-provided/xml-apis-ext-1.3.04.jar')
-    compile files(poiDir + '/lib/ooxml-provided/xmlgraphics-commons-2.3.jar')
-    compile files(poiDir + '/lib/activation-1.1.1.jar')
+    compile files(poiDir + '/lib/ooxml-provided/xmlgraphics-commons-2.4.jar')
 	compile files(poiDir + '/lib/main/commons-collections4-4.4.jar')
 	compile files(poiDir + '/lib/ooxml/commons-compress-1.20.jar')
-	compile files(poiDir + '/lib/jaxb-api-2.3.1.jar')
-    compile files(poiDir + '/lib/jaxb-core-2.3.0.1.jar')
-    compile files(poiDir + '/lib/jaxb-impl-2.3.2.jar')
     compile files(poiDir + '/lib/main/SparseBitSet-1.2.jar')
-	compile files(poiDir + '/lib/ooxml/xmlbeans-3.1.0.jar')
+	compile files(poiDir + '/lib/ooxml/xmlbeans-4.0.0.jar')
     compile files(poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar')
     compile files(poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
-    compile files(poiDir + '/build/dist/maven/poi-ooxml-schemas/poi-ooxml-schemas-' + poiVersion + '.jar')
+    compile files(poiDir + '/build/dist/maven/poi-ooxml-lite/poi-ooxml-lite-' + poiVersion + '.jar')
     compile files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
 
+	testCompile 'junit:junit:4.13.1'
+	testCompile 'org.apache.ant:ant:1.10.9'
+	testCompile 'org.dstadler:commons-test:1.0.0.19'
+
 	// we use the integration-test framework from POI here as well
-	compile files(poiDir + '/build/dist/maven/poi-integration-test/poi-integration-test-' + poiVersion + '.jar')
-
+	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-integration/poi-integration-' + poiVersion + '.jar')
+	// required for NullPrintStream for now
+	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
-	compile 'junit:junit:4.13.1'
-	compile 'org.apache.ant:ant:1.10.9'
-
-   	testCompile 'org.dstadler:commons-test:1.0.0.19'
+	poiIntegrationTestCompile 'junit:junit:4.13.1'
+	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.9'
 }
 
 openjpa {

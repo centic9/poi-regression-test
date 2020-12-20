@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.time.FastDateFormat;
-import org.apache.poi.TestAllFiles;
 import org.apache.poi.Version;
 import org.apache.poi.stress.FileHandler;
+import org.apache.poi.stress.TestAllFiles;
 
 import java.io.File;
 import java.io.FileWriter;

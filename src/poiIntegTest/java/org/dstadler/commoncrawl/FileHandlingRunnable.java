@@ -6,7 +6,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.poi.BaseIntegrationTest;
+import org.apache.poi.stress.BaseIntegrationTest;
 import org.apache.poi.stress.FileHandler;
 
 import java.io.File;
