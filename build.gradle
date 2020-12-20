@@ -27,7 +27,7 @@ def poiVersion = '5.0.0-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
-def poiVersionRC = '-5.0.0-RC0'
+def poiVersionRC = '-5.0.0-RC1'
 
 //provide defaults so we do not need to specify them always
 if (!project.hasProperty('resultFile')) {
