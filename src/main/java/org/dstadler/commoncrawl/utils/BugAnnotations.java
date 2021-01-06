@@ -33,7 +33,7 @@ public class BugAnnotations {
         return "";
     }
 
-    private static final String FILE_PATTERN = "[A-Za-z0-9._/=&\u039C\u03BC~()-]+";
+    private static final String FILE_PATTERN = ".+";
 
     // defines a pattern and the replacement string, all replacements are applied
     // on each exception during creating the report so we can combine equal items
@@ -52,8 +52,12 @@ public class BugAnnotations {
                 "java.lang.ArrayIndexOutOfBoundsException: *");
         REPLACEMENTS.put(Pattern.compile("org.apache.poi.openxml4j.exceptions.InvalidOperationException: Can't open the specified file: '[A-za-z0-9._/-]+'"),
                 "org.apache.poi.openxml4j.exceptions.InvalidOperationException: Can't open the specified file: *");
-        REPLACEMENTS.put(Pattern.compile("org.junit.AssumptionViolatedException: File [A-za-z0-9._/=&\u039C\u03BC-]+ excluded because it is unsupported old Excel format"),
+        REPLACEMENTS.put(Pattern.compile("org.junit.AssumptionViolatedException: File " + FILE_PATTERN + " excluded because it is unsupported old Excel format"),
                 "org.junit.AssumptionViolatedException: File * excluded because it is unsupported old Excel format");
+        REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File " + FILE_PATTERN + " excluded because it is unsupported old Excel format"),
+                "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is unsupported old Excel format");
+        REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File " + FILE_PATTERN + " excluded because it is an unsupported old format"),
+                "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is an unsupported old format");
         REPLACEMENTS.put(Pattern.compile("java.lang.IllegalStateException: Told we're for characters \\d+ -> \\d+, but actually covers \\d+ characters!"),
                 "java.lang.IllegalStateException: Told we're for characters * -> *, but actually covers * characters!");
         REPLACEMENTS.put(Pattern.compile("java.lang.RuntimeException: java.lang.IllegalArgumentException: The end \\(\\d+\\) must not be before the start \\(\\d+\\)"),
@@ -112,6 +116,8 @@ public class BugAnnotations {
                 "java.lang.IllegalArgumentException: The end * must not be before the start *");
         REPLACEMENTS.put(Pattern.compile("java\\.lang\\.IllegalArgumentException: Invalid cell range, having lastRow < firstRow \\|\\| lastCol < firstCol, had rows \\d+ >= \\d+ or cells \\d+ >= \\d+"),
                 "java.lang.IllegalArgumentException: Invalid cell range, having lastRow < firstRow || lastCol < firstCol, had rows * >= * or cells * >= *");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: Invalid char \\(.\\) found at index \\([0-9]+\\) in sheet name '.*'"),
+                "java.lang.IllegalArgumentException: Invalid char (*) found at index (*) in sheet name *");
     }
 
     public static String getReplacement(String exception) {

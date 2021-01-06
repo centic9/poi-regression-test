@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BugAnnotationsTest {
 
@@ -80,6 +82,26 @@ public class BugAnnotationsTest {
 
         replacement = BugAnnotations.getReplacement("java.io.FileNotFoundException: no such entry: \"WordDocument\", had: [__substg1.0_0E1D001E, __substg1.0_007F0102, __substg1.0_65E30102, __substg1.0_0E02001E, __substg1.0_00470102, __substg1.0_0070001E, __substg1.0_800D001E, __substg1.0_0064001E, __substg1.0_007D001E, __substg1.0_0C1A001E, __attach_version1.0_#00000000, __substg1.0_0065001E, __substg1.0_0E04001E, __substg1.0_00410102, __substg1.0_0040001E, __substg1.0_00710102, __substg1.0_00520102, __recip_version1.0_#00000000, __substg1.0_65E20102, __substg1.0_0C190102, __substg1.0_0E03001E, __substg1.0_3FFA001E, __substg1.0_001A001E, __substg1.0_0037001E, __substg1.0_300B0102, __substg1.0_003F0102, __substg1.0_8006001E, __substg1.0_10090102, __substg1.0_0C1E001E, __substg1.0_00510102, __substg1.0_0076001E, __substg1.0_0042001E, __substg1.0_00430102, __substg1.0_0C1F001E, __substg1.0_0077001E, __substg1.0_1000001E, __substg1.0_0078001E, __substg1.0_800A001E, __substg1.0_0C1D0102, __substg1.0_10F3001E, __substg1.0_800C001E, __nameid_version1.0, __substg1.0_8009001E, __substg1.0_003D001E, __substg1.0_1035001E, __substg1.0_0044001E, __substg1.0_0075001E, __substg1.0_800B001E, __properties_version1.0, __substg1.0_003B0102]");
         assertEquals("java.io.FileNotFoundException: no such entry: \"WordDocument\", had: [*]",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File OpenOfficeBugDatabase/22206_registraƒnÃ\u00AD_karta_vznik.doc excluded because it is unsupported old Excel format");
+        assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is unsupported old Excel format",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File OpenOfficeBugDatabase/22206_registraƒnÃ\u00AD_karta_vznik.doc excluded because it is unsupported old Excel format");
+        assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is unsupported old Excel format",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File OpenOfficeBugDatabase/22206_registraƒnÃ\u00AD_karta_ukonƒenÃ\u00AD.doc excluded because it is unsupported old Excel format");
+        assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is unsupported old Excel format",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File OpenOfficeBugDatabase/22206_informaƒnÃ\u00AD_karta_vznikхПояснительазпк-ç¬¬å…\u00ADç« ç´—ç·šçš„å¹¾ä½•æ€§è³ªå’Œå“'$'\\302\\201''è³ªè©•å®š.pp.doc excluded because it is unsupported old Excel format");
+        assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is unsupported old Excel format",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("java.lang.IllegalArgumentException: Invalid char (/) found at index (5) in sheet name 'Ibiza/Cordoba 1993-1999r. (2)'");
+        assertEquals("java.lang.IllegalArgumentException: Invalid char (*) found at index (*) in sheet name *",
                 replacement);
     }
 
