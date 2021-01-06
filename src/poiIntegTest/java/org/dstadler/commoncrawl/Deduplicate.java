@@ -39,13 +39,14 @@ public class Deduplicate {
         int count = 0;
         for (Long sizesKey : sizesKeys) {
             NavigableSet<String> sizeFiles = sizes.get(sizesKey);
-            if(sizeFiles.size() <= 1 /*||
+            if (sizeFiles.size() <= 1 /*||
                     // used to not start at the beginning when continuing a previous run that stopped for some reason
                     sizesKey <= 524037*/) {
                 System.out.println("Only having " + sizeFiles.size() + " files with size " + sizesKey + ", " + (sizes.size() - count) + " files left");
                 count += sizeFiles.size();
                 continue;
             }
+            System.out.println();
             System.out.println("Looking at " + sizeFiles.size() + " files with size " + sizesKey + ", " + (sizes.size() - count) + " files left");
 
             Map<String, String> hashes = new HashMap<>();
@@ -62,8 +63,12 @@ public class Deduplicate {
 
                     hashes.put(hash, file);
                 } catch (FileNotFoundException e) {
-                    System.out.println("Could not read file, probably the filename contains unexpected characters");
+                    System.out.println("Could not read file '" + new File(ROOT_DIR, file).getAbsolutePath() +
+                            "' for size " + sizesKey + ", probably the filename contains unexpected characters");
                     e.printStackTrace();
+                } catch (IOException | RuntimeException e) {
+                    throw new IOException("Failed for file '" + new File(ROOT_DIR, file).getAbsolutePath() +
+                            "' for size " + sizesKey, e);
                 }
             }
         }
@@ -90,7 +95,9 @@ public class Deduplicate {
         // buffer up to one MB per file to speed up hashing
         final int buf;
         if(file.length() > 1024*1024) {
-            buf = 1024*1024;
+            buf = 1024 * 1024;
+        } else if (file.length() == 0) {
+            buf = 1024;
         } else {
             buf = (int)file.length();
         }
