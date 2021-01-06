@@ -40,6 +40,17 @@ public class POIStatusTest {
 	}
 
 	@Test
+	public void testSetByVersionOldFormat() throws Exception {
+		ResultItem item = ResultItem.parse("{\"exceptionText\":\"org.opentest4j.TestAbortedException: File * excluded because it is unsupported old Excel format\"}");
+		assertFalse(item.isTimeout());
+		checkStatus(item, FileStatus.OLDFORMAT);
+
+		item = ResultItem.parse("{\"exceptionText\":\"org.opentest4j.TestAbortedException: File * excluded because it is an unsupported old format\"}");
+		assertFalse(item.isTimeout());
+		checkStatus(item, FileStatus.OLDFORMAT);
+	}
+
+	@Test
 	public void testSetByVersionTimeoutByStacktrace() throws Exception {
 		// detect timeout for some special stacktraces as well
 		ResultItem item = ResultItem.parse("{\"timeout\":false,\"exceptionText\":\"java.lang.ThreadDeath: blabla\",\"exceptionStacktrace\":\"java.lang.ThreadDeath: blabla\"}");

@@ -751,6 +751,9 @@ public class POIStatus extends Base {
 			status = FileStatus.OOM;
 		} else if (item.getExceptionText().contains("The supplied file was empty (zero bytes long)")) {
 			status = FileStatus.ZEROBYTES;
+		} else if (matchesOldFormatStrings(item.getExceptionText())) {
+			// some files are with an older format which Apache POI does not support
+			status = FileStatus.OLDFORMAT;
 		} else {
 			status = FileStatus.ERROR;
 		}
@@ -892,6 +895,23 @@ public class POIStatus extends Base {
 
 	private boolean matchesInvalidStrings(String exceptionText) {
 		for(String str : INVALID_FILE_EXCEPTIONS) {
+			if(exceptionText.contains(str)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private static final String[] OLD_FORMAT_EXCEPTIONS = new String[] {
+			// old text for Assume
+			"excluded because it is unsupported old Excel format",
+			// newer text for Assume
+			"excluded because it is an unsupported old format",
+	};
+
+	private boolean matchesOldFormatStrings(String exceptionText) {
+		for(String str : OLD_FORMAT_EXCEPTIONS) {
 			if(exceptionText.contains(str)) {
 				return true;
 			}

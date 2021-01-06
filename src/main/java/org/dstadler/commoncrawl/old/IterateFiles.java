@@ -20,13 +20,13 @@ import org.dstadler.commons.logging.jdk.LoggerFactory;
 import static org.dstadler.commoncrawl.report.BaseReport.ROOT_DIR;
 
 /**
- * Obosolete tool to list all URLs in the database
+ * Obsolete tool to list all URLs in the database
  */
 public class IterateFiles {
 	private static final Logger log = LoggerFactory.make();
 
-    private Map<String, String> filenameToDigest = new HashMap<>();
-    private Set<String> digests = new HashSet<>();
+    private final Map<String, String> filenameToDigest = new HashMap<>();
+    private final Set<String> digests = new HashSet<>();
 
 	public static void main(String[] args) throws Exception {
 		LoggerFactory.initLogging();

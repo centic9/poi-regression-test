@@ -30,7 +30,10 @@ public enum FileStatus {
 	OOM(4),
 
 	// the file was empty
-	ZEROBYTES(5);
+	ZEROBYTES(5),
+
+	// file is reported as having an "old format"
+	OLDFORMAT(6);
 
 	private final int order;
 
