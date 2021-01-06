@@ -10,13 +10,15 @@ public class OverviewItem {
 	private final FileStatus statusBefore;
 	private final FileStatus statusNow;
 	private final String fileName;
+	private final String percentage;
 
-	public OverviewItem(int count, FileStatus statusBefore, FileStatus statusNow, String fileName) {
+	public OverviewItem(int count, FileStatus statusBefore, FileStatus statusNow, String fileName, String percentage) {
 		super();
 		this.count = count;
 		this.statusBefore = statusBefore;
 		this.statusNow = statusNow;
 		this.fileName = fileName;
+		this.percentage = percentage;
 	}
 
 	public int getCount() {
@@ -45,5 +47,10 @@ public class OverviewItem {
 		}
 
 		return "white";
+	}
+
+	@SuppressWarnings("unused")	// called by Velocity
+	public String getPercentage() {
+		return percentage;
 	}
 }

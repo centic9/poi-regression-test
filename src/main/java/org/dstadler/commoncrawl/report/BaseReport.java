@@ -122,7 +122,8 @@ public class BaseReport {
             log.info("Having " + result[0] + " times " + poiBefore + " for " + VERSION_BEFORE + " and " + poiNow + " for " + VERSION_NOW +
                     ", sample-file: " + fileName);
 
-            items.add(new OverviewItem(count, poiBefore, poiNow, fileName));
+            items.add(new OverviewItem(count, poiBefore, poiNow, fileName,
+                    String.format("%.2f", ((double)100)*count/(Long)context.get("statusCount"))));
 
             if(copySampleFiles) {
                 copySampleFile(REPORT_DIR, fileName);
@@ -150,7 +151,8 @@ public class BaseReport {
             log.info("Having " + result[0] + " times " + poiNow + " for " + VERSION_NOW +
                     ", sample-file: " + fileName);
 
-            items.add(new OverviewItem(count, null, poiNow, fileName));
+            items.add(new OverviewItem(count, null, poiNow, fileName,
+                    String.format("%.2f", ((double)100)*count/(Long)context.get("statusCount"))));
 
             if(copySampleFiles) {
                 copySampleFile(REPORT_DIR_ALL, fileName);

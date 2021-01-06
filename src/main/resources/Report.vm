@@ -1,3 +1,12 @@
+#* @vtlvariable name="date" type="java.lang.String" *#
+#* @vtlvariable name="allDataLimit" type="int" *#
+#* @vtlvariable name="version" type="java.lang.String" *#
+#* @vtlvariable name="items" type="java.util.Collection<org.dstadler.commoncrawl.report.ReportItem>" *#
+#* @vtlvariable name="statusCount" type="long" *#
+#* @vtlvariable name="baseVersion" type="boolean" *#
+#* @vtlvariable name="copySampleFiles" type="boolean" *#
+#* @vtlvariable name="overview" type="java.util.Collection<org.dstadler.commoncrawl.report.OverviewItem>" *#
+#* @vtlvariable name="stringutils" type="org.apache.commons.lang3.StringUtils" *#
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -40,6 +49,7 @@
         <div class="col-md-1"><p class="bg-success">Count</p></div>
         #if($baseVersion)<div class="col-md-2"><p class="bg-success">$baseVersion</p></div>#end
         <div class="col-md-2"><p class="bg-success">$version</p></div>
+        <div class="col-md-2"><p class="bg-success">Percentage</p></div>
         <div class="col-md-2"><p class="bg-success">Sample-File</p></div>
     </div>
 
@@ -48,6 +58,7 @@
         <div class="col-md-1" style="background-color:$item.backgroundColor">$item.count</div>
         #if($baseVersion)<div class="col-md-2">$item.statusBefore</div>#end
         <div class="col-md-2">$item.statusNow</div>
+        <div class="col-md-2">$item.percentage</div>
         #if($copySampleFiles)
         <div class="col-md-2"><a href="$item.fileName">Download</a></div>
         #else
