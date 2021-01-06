@@ -36,19 +36,28 @@ public class ResultItem {
 	    				item.exceptionText = jp.getValueAsString();
 	    			} else if ("exceptionStacktrace".equals(name)) {
 	    				item.exceptionStacktrace = jp.getValueAsString();
-	    			} else if ("duration".equals(name)) {
-	    				item.duration = jp.getValueAsLong();
 	    			} else {
-	    				throw new IllegalStateException("Unknown field found: " + name);
+	    				throw new IllegalStateException("Unknown string-field found: " + name);
 	    			}
-	    		} else if(jp.getCurrentToken() == JsonToken.VALUE_TRUE) {
+	    		} else if(jp.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
+	    			String name = jp.getCurrentName();
+					if ("duration".equals(name)) {
+						item.duration = jp.getValueAsLong();
+	    			} else {
+	    				throw new IllegalStateException("Unknown int-field found: " + name);
+	    			}
+	    		} else if(jp.getCurrentToken() == JsonToken.VALUE_TRUE ||
+						jp.getCurrentToken() == JsonToken.VALUE_FALSE) {
 	    			String name = jp.getCurrentName();
 					if ("timeout".equals(name)) {
 	    				item.timeout = jp.getValueAsBoolean();
 	    			} else {
-	    				throw new IllegalStateException("Unknown field found: " + name);
+	    				throw new IllegalStateException("Unknown boolean-field found: " + name);
 	    			}
-	    		}
+	    		} else if (jp.getCurrentToken() != JsonToken.START_OBJECT &&
+						jp.getCurrentToken() != JsonToken.FIELD_NAME) {
+	    			throw new IllegalStateException("Unknown token-type found: " + jp.getCurrentToken());
+				}
 	    	}
     	}
 
