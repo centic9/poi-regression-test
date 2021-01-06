@@ -8,6 +8,7 @@ CommonCrawl/
 derby.log
 CommonCrawl.log
 /result-*.json
+/result-*.json.csv
 
 ## Directory-based project format:
 .idea/

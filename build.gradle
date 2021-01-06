@@ -261,6 +261,20 @@ task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
 	classpath = sourceSets.main.runtimeClasspath
 }
 
+task processResultsToCSV(type:JavaExec, dependsOn: compileJava) {
+	description = 'Reads the result-file and convers the JSON format to a CSV file'
+
+	jvmArgs = [
+			'-Xmx2048m',
+			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+            		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
+	]
+
+	main = 'org.dstadler.commoncrawl.utils.ProcessResultsToCSV'
+	args = [ resultFile ]
+	classpath = sourceSets.main.runtimeClasspath
+}
+
 static def getDateTime() {
 	new Date().format("yyyy-MM-dd-HH-mm")
 }
