@@ -22,8 +22,8 @@ import java.util.List;
 public class DataAccessTest extends DatabaseBase {
 	private DataAccess access;
 
-	private String LONG_STR = StringUtils.repeat("a", 8096);
-	private String OVERLONG_STR = StringUtils.repeat("a", 8096+1);
+	private final String LONG_STR = StringUtils.repeat("a", 8096);
+	private final String OVERLONG_STR = StringUtils.repeat("a", 8096+1);
 
 	@Before
 	public void create() {

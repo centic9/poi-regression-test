@@ -129,7 +129,7 @@ public class TikaTest {
         System.out.println("Had: " + types.sortedMap().toString());
     }*/
 
-    private static Set<String> IGNORED_MIMETYPES = new HashSet<>();
+    private static final Set<String> IGNORED_MIMETYPES = new HashSet<>();
     static {
         IGNORED_MIMETYPES.add("text/plain");
         IGNORED_MIMETYPES.add("image/png");

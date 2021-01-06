@@ -108,7 +108,7 @@ The following utilities are available for this:
 ### Build it and run tests
 
 	cd poi-regression-test
-	./gradlew check jacocoTestReport
+	./gradlew check poiIntegrationTest jacocoTestReport
 
 #### Licensing
 

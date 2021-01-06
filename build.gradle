@@ -60,9 +60,17 @@ sourceSets {
 		java {
 			srcDir 'src/testpoi/java'
 		}
+		resources {
+			srcDir 'src/testpoi/resources'
+		}
 		compileClasspath += sourceSets.main.compileClasspath
 		runtimeClasspath += sourceSets.main.runtimeClasspath
 	}
+}
+
+configurations {
+	poiIntegrationImplementation.extendsFrom testImplementation
+	poiIntegrationRuntimeOnly.extendsFrom runtimeOnly
 }
 
 dependencies {
@@ -157,6 +165,15 @@ test {
 
 jacoco {
 	toolVersion = '0.8.6'
+}
+
+tasks.register('poiIntegrationTest', Test) {
+	description = 'Runs integration tests.'
+	group = 'verification'
+
+	testClassesDirs = sourceSets.poiIntegrationTest.output.classesDirs
+	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
+	shouldRunAfter test
 }
 
 task processFiles(type:JavaExec, dependsOn: compileJava) {

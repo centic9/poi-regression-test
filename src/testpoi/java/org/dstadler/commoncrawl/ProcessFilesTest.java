@@ -1,11 +1,14 @@
 package org.dstadler.commoncrawl;
 
 import org.apache.poi.stress.FileHandler;
+import org.apache.poi.stress.POIFileScanner;
 import org.apache.poi.stress.XWPFFileHandler;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -63,15 +66,15 @@ public class ProcessFilesTest {
 
 	private static class NullFileHandler implements FileHandler {
         @Override
-        public void handleFile(InputStream stream, String path) throws Exception {
+        public void handleFile(InputStream stream, String path) {
         }
 
         @Override
-        public void handleExtracting(File file) throws Exception {
+        public void handleExtracting(File file) {
         }
 
 		@Override
-		public void handleAdditional(File file) throws Exception {
+		public void handleAdditional(File file) {
 		}
 	}
 
@@ -80,5 +83,13 @@ public class ProcessFilesTest {
 		// just invoke it here so
 		Writer writer = new OutputStreamWriter(System.out);
 		new ProcessFiles.MemoryChecker(writer).run();
+	}
+
+	@Test
+	public void testPOIFileScanner() throws IOException {
+		// just make sure that POIFileScanner works and all dependencies
+		// are available
+		Collection<Map.Entry<String, FileHandler>> files = POIFileScanner.scan(new File("src"));
+		assertNotNull(files);
 	}
 }

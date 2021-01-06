@@ -26,7 +26,7 @@ public class ReportTest {
     public static final File RESULT_FILE_ALL = new File("build/testReportAll.html");
 
     @Test
-    public void testFileHandleLeaks() throws IOException {
+    public void testFileHandleLeaks() {
         Runnable shutdown = DatabaseStarter.ensureDatabase(11527);
 
         try (DataAccess access = DataAccessFactory.getInstance(DataAccessFactory.DB_TEST)) {
@@ -80,7 +80,7 @@ public class ReportTest {
 
     private void addData(Map<String, Object> context) {
         List<OverviewItem> overview = new ArrayList<>();
-        overview.add(new OverviewItem(23, FileStatus.OK, FileStatus.ERROR, "some file name"));
+        overview.add(new OverviewItem(23, FileStatus.OK, FileStatus.ERROR, "some file name", "2.30"));
         context.put("overview", overview);
 
         List<ReportItem> items = getItems(10);
