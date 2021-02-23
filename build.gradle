@@ -128,7 +128,7 @@ dependencies {
     compile files(poiDir + '/build/dist/maven/poi-ooxml-lite/poi-ooxml-lite-' + poiVersion + '.jar')
     compile files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
 
-	testCompile 'junit:junit:4.13.1'
+	testCompile 'junit:junit:4.13.2'
 	testCompile 'org.apache.ant:ant:1.10.9'
 	testCompile 'org.dstadler:commons-test:1.0.0.19'
 
@@ -137,7 +137,7 @@ dependencies {
 	// required for NullPrintStream for now
 	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
-	poiIntegrationTestCompile 'junit:junit:4.13.1'
+	poiIntegrationTestCompile 'junit:junit:4.13.2'
 	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.9'
 }
 
