@@ -76,18 +76,18 @@ configurations {
 dependencies {
 	compile 'org.dstadler:commons-dost:1.0.0.32'
 	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
-	compile 'com.fasterxml.jackson.core:jackson-core:2.12.1'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.1'
-	compile 'commons-io:commons-io:2.8.0'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.12.3'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.3'
+	compile 'commons-io:commons-io:2.9.0'
 	compile 'org.apache.commons:commons-lang3:3.12.0'
-	compile 'com.google.code.gson:gson:2.8.6'
+	compile 'com.google.code.gson:gson:2.8.7'
 	compile 'org.apache.velocity:velocity:1.7'
 
-	compile 'org.apache.openjpa:openjpa:3.1.2'
+	compile 'org.apache.openjpa:openjpa:3.2.0'
 	runtime 'org.apache.commons:commons-dbcp2:2.8.0'
-	compile 'org.apache.derby:derbynet:10.14.2.0'
-	runtime 'org.apache.derby:derbyclient:10.14.2.0'
+	compile 'org.apache.derby:derbynet:10.15.2.0'
+	runtime 'org.apache.derby:derbyclient:10.15.2.0'
 
 	// use the desired version of POI
 
@@ -129,7 +129,7 @@ dependencies {
     compile files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
 
 	testCompile 'junit:junit:4.13.2'
-	testCompile 'org.apache.ant:ant:1.10.9'
+	testCompile 'org.apache.ant:ant:1.10.10'
 	testCompile 'org.dstadler:commons-test:1.0.0.19'
 
 	// we use the integration-test framework from POI here as well
@@ -138,7 +138,7 @@ dependencies {
 	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
 	poiIntegrationTestCompile 'junit:junit:4.13.2'
-	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.9'
+	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.10'
 }
 
 openjpa {
