@@ -86,8 +86,8 @@ dependencies {
 
 	compile 'org.apache.openjpa:openjpa:3.2.0'
 	runtime 'org.apache.commons:commons-dbcp2:2.8.0'
-	compile 'org.apache.derby:derbynet:10.15.2.0'
-	runtime 'org.apache.derby:derbyclient:10.15.2.0'
+	compile 'org.apache.derby:derbynet:10.14.2.0'
+	runtime 'org.apache.derby:derbyclient:10.14.2.0'
 
 	// use the desired version of POI
 
