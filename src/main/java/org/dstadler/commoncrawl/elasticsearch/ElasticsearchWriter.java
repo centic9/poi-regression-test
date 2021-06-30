@@ -215,7 +215,7 @@ public class ElasticsearchWriter {
         log.info("Updating template on host " + esHost + " and user: " + esUser);
 
         try (HttpClientWrapper metrics = new HttpClientWrapper(esUser, esPassword, 60_000)) {
-            String url = esHost + "_template/template_poi";
+            String url = esHost + (esHost.endsWith("/") ? "" : "/") + "_template/template_poi";
             final HttpPut httpPut = new HttpPut(url);
             httpPut.addHeader("Content-Type", "application/json");
             httpPut.setEntity(new FileEntity(new File("src/main/resources/indextemplate.json")));
