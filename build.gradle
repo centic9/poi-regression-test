@@ -85,7 +85,7 @@ dependencies {
 	compile 'org.apache.velocity:velocity:1.7'
 
 	compile 'org.apache.openjpa:openjpa:3.2.0'
-	runtime 'org.apache.commons:commons-dbcp2:2.8.0'
+	runtime 'org.apache.commons:commons-dbcp2:2.9.0'
 	compile 'org.apache.derby:derbynet:10.14.2.0'
 	runtime 'org.apache.derby:derbyclient:10.14.2.0'
 
