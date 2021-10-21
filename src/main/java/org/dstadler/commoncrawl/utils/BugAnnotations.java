@@ -110,7 +110,7 @@ public class BugAnnotations {
                 "java.lang.ArrayIndexOutOfBoundsException: There are only * font records, but you asked for index *");
         REPLACEMENTS.put(Pattern.compile("com\\.sun\\.org\\.apache\\.xerces\\.internal\\.impl\\.io\\.MalformedByteSequenceException: Ung\u00FCltiges Byte \\d+ von \\d+-Byte-UTF-8-Sequenz."),
                 "com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException: Ung\u00FCltiges Byte * von *-Byte-UTF-8-Sequenz.");
-        REPLACEMENTS.put(Pattern.compile("java\\.io\\.FileNotFoundException: no such entry: \"(WordDocument|VisioDocument|PowerPoint Document)\", had: \\[[-a-zA-Z0-9_ ,.#\u0001-\u0005]+]"),
+        REPLACEMENTS.put(Pattern.compile("java\\.io\\.FileNotFoundException: no such entry: \"(WordDocument|VisioDocument|PowerPoint Document)\", had: \\[[-a-zA-Z0-9_ ,.#\u0001-\u0006]*]"),
                 "java.io.FileNotFoundException: no such entry: \"$1\", had: [*]");
         REPLACEMENTS.put(Pattern.compile("java\\.lang\\.IllegalArgumentException: The end \\(\\d+\\) must not be before the start \\(\\d+\\)"),
                 "java.lang.IllegalArgumentException: The end * must not be before the start *");
@@ -118,6 +118,32 @@ public class BugAnnotations {
                 "java.lang.IllegalArgumentException: Invalid cell range, having lastRow < firstRow || lastCol < firstCol, had rows * >= * or cells * >= *");
         REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: Invalid char \\(.\\) found at index \\([0-9]+\\) in sheet name '.*'"),
                 "java.lang.IllegalArgumentException: Invalid char (*) found at index (*) in sheet name *");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: newLimit > capacity: \\([0-9 >]+\\)"),
+                "java.lang.IllegalArgumentException: newLimit > capacity: (*)");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: Width \\(\\d+\\) and height \\(\\d+\\) cannot be <= 0"),
+                "java.lang.IllegalArgumentException: Width (*) and height (*) cannot be <= 0");
+        REPLACEMENTS.put(Pattern.compile("java.io.IOException: Unsupported blocksize \\(2\\^\\d+\\)\\. Expected 2\\^9 or 2\\^12\\."),
+                "java.io.IOException: Unsupported blocksize (*). Expected 2^9 or 2^12.");
+        REPLACEMENTS.put(Pattern.compile("org.apache.xmlbeans.SchemaTypeLoaderException: XML-BEANS compiled schema: Could not locate compiled schema resource org/apache/poi/[-a-zA-Z0-9._/]+ \\(o.a.p.[-a-zA-Z0-9._/]+\\) - code 0"),
+                "org.apache.xmlbeans.SchemaTypeLoaderException: XML-BEANS compiled schema: Could not locate compiled schema resource org/apache/poi/* (o.a.p.*) - code 0");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalStateException: Category and values must have the same point count, but had \\d+ categories and \\d+ values\\."),
+                "java.lang.IllegalStateException: Category and values must have the same point count, but had * categories and * values.");
+        REPLACEMENTS.put(Pattern.compile("o.a.p.ss.formula.eval.NotImplementedException: Error evaluating cell .*"),
+                "o.a.p.ss.formula.eval.NotImplementedException: Error evaluating cell *");
+        REPLACEMENTS.put(Pattern.compile("java.lang.RuntimeException: Could not resolve external workbook name .*\\. The following workbook names are valid: \\(.*\\)"),
+                "java.lang.RuntimeException: Could not resolve external workbook name * The following workbook names are valid: *");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: column index may not be negative, but had .*"),
+                "java.lang.IllegalArgumentException: column index may not be negative, but had *");
+        REPLACEMENTS.put(Pattern.compile("o.a.p.ss.formula.FormulaParseException: The column doesn't exist in table .*"),
+                "o.a.p.ss.formula.FormulaParseException: The column doesn't exist in table *");
+        REPLACEMENTS.put(Pattern.compile("o.a.p.ss.formula.FormulaParseException: Illegal table name: .*"),
+                "o.a.p.ss.formula.FormulaParseException: Illegal table name: *");
+        REPLACEMENTS.put(Pattern.compile("org.apache.poi.ss.formula.FormulaParseException: Illegal table name: .*"),
+                "org.apache.poi.ss.formula.FormulaParseException: Illegal table name: *");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalArgumentException: Cannot access 0-based index \\d+ in point-array with \\d+ items"),
+                "java.lang.IllegalArgumentException: Cannot access 0-based index * in point-array with * items");
+        REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File .* excluded because the Zip file is incomplete"),
+                "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because the Zip file is incomplete");
     }
 
     public static String getReplacement(String exception) {

@@ -1,16 +1,27 @@
 package org.dstadler.commoncrawl;
 
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.stress.FileHandler;
-import org.apache.poi.stress.POIFileScanner;
+import org.apache.poi.stress.HSLFFileHandler;
 import org.apache.poi.stress.XWPFFileHandler;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ProcessFilesTest {
 	private Writer stringWriter;
@@ -32,6 +43,7 @@ public class ProcessFilesTest {
 				stringWriter.toString().contains("\"exceptionText\":\"java.io.FileNotFoundException:"));
 	}
 
+	@Ignore("Just a local test")
 	@Test
 	public void testFileNullHandler() throws IOException {
 		stringWriter = new StringWriter();
@@ -91,5 +103,34 @@ public class ProcessFilesTest {
 		// are available
 		Collection<Map.Entry<String, FileHandler>> files = POIFileScanner.scan(new File("src"));
 		assertNotNull(files);
+	}
+
+	@Ignore("Only used for local testing")
+	@Test
+	public void testOneFile() throws Exception {
+		String file = "alfresco.vgregion.se_alfresco_service_vgr_storage_node_content_workspace_spacesstore_a1dc0dc0-b6f6-4890-8dc6-e4dd029764f1_tom_20fl_c3_b6desschema_20nytt.ppt_a=false&guest=true&native=true.ppt";
+		String ROOT_DIR = "../download2";
+		FileHandler handler = new HSLFFileHandler();
+
+		System.out.println("Handling file: " + file);
+		File fileIO = new File(ROOT_DIR, file);
+		try (InputStream stream = new BufferedInputStream(new FileInputStream(fileIO), 1024 * 100)) {
+			try {
+				handler.handleFile(stream, file);
+			} catch (IOException e) {
+				if (!e.getMessage().equals("Truncated ZIP file")) {
+					throw e;
+				}
+			}
+			//handler.handleAdditional(fileIO);
+
+			try {
+				handler.handleExtracting(fileIO);
+			} catch (InvalidOperationException e) {
+				if (e.getCause() != null && !e.getCause().getMessage().equals("Truncated ZIP file")) {
+					throw e;
+				}
+			}
+		}
 	}
 }

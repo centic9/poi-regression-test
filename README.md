@@ -12,7 +12,7 @@ The following installed packages are required
 * OpenJDK 8 (newer JDKs should work, but Apache POI still supports JDK 8)
 * fontconfig (to avoid a possible NPE in tests, see https://github.com/AdoptOpenJDK/openjdk-build/issues/693)
 
-* A checkout of sources of Apache POI which is used during the tests, should be available 
+* A checkout of sources of Apache POI which is used during the tests should be available 
  at directory `/opt/poi`
 
 For syncing the results to a page at people.apache.org, the following additional packages are required
@@ -35,15 +35,20 @@ For testing, you can use the files included in the Apache POI source repository 
 
 Compile the jars for Apache POI to use them as part of the test-run.
 
-For Apache POI up to 4.1.2:
+For Apache POI before 5.0.0:
 
     cd /opt/poi
     ant jar integration-test-jar
     
-For Apache POi since 5.0.0:
+For Apache POI 5.0.0 and newer:
 
     cd /opt/poi
     ant jar compile-integration
+
+For Apache POI 5.1.0 and newer:
+
+    cd /opt/poi
+    ./gradlew jar :poi-integration:testJar
 
 ### Set up test
 

@@ -13,7 +13,7 @@ rmdir ../transfer 2> /dev/null || true
 mkdir -p ../transfer
 
 echo "Mounting"
-sshfs -o sshfs_debug -o idmap=user -o gid=1000 -o nomap=error ${DESTINATION} ../transfer
+sshfs -o sshfs_debug -o idmap=user -o gid=1000 -o nomap=error -o HostKeyAlgorithms=ssh-rsa ${DESTINATION} ../transfer
 
 mkdir -p ../transfer/public_html/poi_regression
 

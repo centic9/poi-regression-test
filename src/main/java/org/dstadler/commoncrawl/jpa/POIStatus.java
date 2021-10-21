@@ -51,7 +51,10 @@ import com.google.common.base.Preconditions;
 		"exceptionStacktrace412RC2","exceptionText412RC2","poi412RC2",
 		"exceptionStacktrace412RC3","exceptionText412RC3","poi412RC3",
 		"exceptionStacktrace413RC0","exceptionText413RC0","poi413RC0",
-		"exceptionStacktrace500RC1","exceptionText500RC1","poi500RC1" })
+		"exceptionStacktrace500RC1","exceptionText500RC1","poi500RC1",
+		"exceptionStacktrace500RC2","exceptionText500RC2","poi500RC2",
+		"exceptionStacktrace510RC1","exceptionText510RC1","poi510RC1",
+		"exceptionStacktrace510RC2","exceptionText510RC2","poi510RC2" })
 @Entity
 public class POIStatus extends Base {
 	@JsonProperty
@@ -491,6 +494,60 @@ public class POIStatus extends Base {
 	@Basic
 	private long duration500RC1;
 
+	@JsonProperty
+	@Basic
+	private FileStatus poi500RC2;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText500RC2;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace500RC2;
+
+	@JsonProperty
+	@Basic
+	private long duration500RC2;
+
+	@JsonProperty
+	@Basic
+	private FileStatus poi510RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText510RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace510RC1;
+
+	@JsonProperty
+	@Basic
+	private long duration510RC1;
+
+	@JsonProperty
+	@Basic
+	private FileStatus poi510RC2;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText510RC2;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace510RC2;
+
+	@JsonProperty
+	@Basic
+	private long duration510RC2;
+
 	public POIStatus() {
 		super();
 	}
@@ -734,6 +791,30 @@ public class POIStatus extends Base {
 		this.poi500RC1 = poi500RC1;
 	}
 
+	public FileStatus getPoi500RC2() {
+		return poi500RC2;
+	}
+
+	public void setPoi500RC2(FileStatus poi500RC2) {
+		this.poi500RC2 = poi500RC2;
+	}
+
+	public FileStatus getPoi510RC1() {
+		return poi510RC1;
+	}
+
+	public void setPoi510RC1(FileStatus poi510RC1) {
+		this.poi510RC1 = poi510RC1;
+	}
+
+	public FileStatus getPoi510RC2() {
+		return poi510RC2;
+	}
+
+	public void setPoi510RC2(FileStatus poi510RC2) {
+		this.poi510RC2 = poi510RC2;
+	}
+
 	public void setByVersion(String version, ResultItem item) {
 		final FileStatus status;
 		if(item.isTimeout() ||
@@ -880,17 +961,34 @@ public class POIStatus extends Base {
 			exceptionText500RC1 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
 			exceptionStacktrace500RC1 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
 			duration500RC1 = item.getDuration();
+		} else if (version.contains("5.0.0-RC2")) {
+			this.poi500RC2 = status;
+			exceptionText500RC2 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace500RC2 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration500RC2 = item.getDuration();
+		} else if (version.contains("5.1.0-RC1")) {
+			this.poi510RC1 = status;
+			exceptionText510RC1 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace510RC1 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration510RC1 = item.getDuration();
+		} else if (version.contains("5.1.0-RC2")) {
+			this.poi510RC2 = status;
+			exceptionText510RC2 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace510RC2 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration510RC2 = item.getDuration();
 		} else {
 			throw new IllegalStateException("Unknown version found: " + version);
 		}
 	}
 
 	private static final String[] INVALID_FILE_EXCEPTIONS = new String[] {
-			"NotOLE2FileException: Invalid header signature; read ",
-			"NotOfficeXmlFileException: No valid entries or contents found, this is not a valid OOXML (Office Open XML) file",
-			"The supplied data appears to be a raw XML file. Formats such as Office 2003 XML are not supported",
-			"excluded because it is actually a PDF/RTF file",
-			"IllegalArgumentException: The document is really a ",
+		"NotOLE2FileException: Invalid header signature; read ",
+		"NotOfficeXmlFileException: No valid entries or contents found, this is not a valid OOXML (Office Open XML) file",
+		"The supplied data appears to be a raw XML file. Formats such as Office 2003 XML are not supported",
+		"excluded because it is actually a PDF/RTF file",
+		"IllegalArgumentException: The document is really a ",
+		" excluded because the Zip file is incomplete",
+		"java.io.IOException: Truncated ZIP file",
 	};
 
 	private boolean matchesInvalidStrings(String exceptionText) {
@@ -904,10 +1002,10 @@ public class POIStatus extends Base {
 	}
 
 	private static final String[] OLD_FORMAT_EXCEPTIONS = new String[] {
-			// old text for Assume
-			"excluded because it is unsupported old Excel format",
-			// newer text for Assume
-			"excluded because it is an unsupported old format",
+		// old text for Assume
+		"excluded because it is unsupported old Excel format",
+		// newer text for Assume
+		"excluded because it is an unsupported old format",
 	};
 
 	private boolean matchesOldFormatStrings(String exceptionText) {

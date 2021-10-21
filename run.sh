@@ -21,7 +21,9 @@ do
             OPT="${OPT} ${key}"
             ;;
         *)
-            echo unknown commandline option ${key}
+            echo
+            echo "unknown commandline option ${key}"
+            echo "usage: run.sh [-s|--with-sync] [-P<gradle-commandline-option>]"
             exit 1
             ;;
     esac

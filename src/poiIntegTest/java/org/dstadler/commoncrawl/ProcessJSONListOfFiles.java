@@ -26,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Stream;
 
+import static org.dstadler.commoncrawl.POIFileScanner.HANDLERS;
+
 /**
  * Load a list of files and their mime-types from a JSON file and process the
  * files according to a mapping of the mime-type to extension.
@@ -114,7 +116,7 @@ public class ProcessJSONListOfFiles {
                     return;
                 }
 
-                FileHandler fileHandler = TestAllFiles.HANDLERS.get(MimeTypes.toExtension(mimeType));
+                FileHandler fileHandler = HANDLERS.get(MimeTypes.toExtension(mimeType));
 
                 //new FileHandlingRunnable(start, fileName, fileHandler, resultWriter).run();
                 FileHandlingRunnable runnable = new FileHandlingRunnable(start, fileName, fileHandler, resultWriter, BASE_DIR);

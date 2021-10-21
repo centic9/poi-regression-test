@@ -4,7 +4,6 @@ import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.poi.Version;
 import org.apache.poi.stress.FileHandler;
-import org.apache.poi.stress.POIFileScanner;
 
 import java.io.File;
 import java.io.FileWriter;

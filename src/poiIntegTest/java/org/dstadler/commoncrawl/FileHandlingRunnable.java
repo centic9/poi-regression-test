@@ -15,6 +15,7 @@ import java.io.Writer;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -100,6 +101,21 @@ public final class FileHandlingRunnable implements Runnable {
                 "estimated remaining time: " + String.format("%.0f", remaining/countPerMinute) + " minutes, " +
                 "estimated finish at: " + DATE_FORMAT.format(DateUtils.addSeconds(new Date(), (int) (remaining*60/countPerMinute))) +
                 ", " + file + " using " + (fileHandler == null ? "<null>" : fileHandler.getClass().getSimpleName()) + info);
+
+        Optional<String> oldestFile = startTimes.keySet().stream().findFirst();
+        long oldestStartTime = oldestFile.map(s -> {
+            Pair<Long, Thread> value = startTimes.get(s);
+            if (value == null) {
+                return 0L;
+            }
+            return System.currentTimeMillis() - value.getLeft();
+        }).orElse(0L);
+        System.out.println("Oldest file still processing: (" + oldestStartTime + "ms): " + oldestFile.orElse("<none>"));
+
+        /*for (Map.Entry<String, Pair<Long, Thread>> entry : startTimes.entrySet()) {
+            long time = System.currentTimeMillis() - entry.getValue().getKey();
+            System.out.println("Currently processing (" + time + "ms): " + entry.getKey());
+        }*/
     }
 
     public static void writeResult(Writer resultWriter, String file, Throwable e, boolean timeout, long duration) {

@@ -37,6 +37,14 @@ public class POIStatusTest {
 		ResultItem item = ResultItem.parse("{\"exceptionText\":\"NotOLE2FileException: Invalid header signature; read \"}");
 		assertFalse(item.isTimeout());
 		checkStatus(item, FileStatus.INVALID);
+
+		item = ResultItem.parse("{\"exceptionText\":\"file abcd.doc  excluded because the Zip file is incomplete\"}");
+		assertFalse(item.isTimeout());
+		checkStatus(item, FileStatus.INVALID);
+
+		item = ResultItem.parse("{\"exceptionText\":\"java.io.IOException: Truncated ZIP file\"}");
+		assertFalse(item.isTimeout());
+		checkStatus(item, FileStatus.INVALID);
 	}
 
 	@Test
