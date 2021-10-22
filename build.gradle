@@ -23,7 +23,7 @@ configurations.all {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.1.0-RC2'
+def poiVersion = '5.1.1-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
@@ -122,7 +122,7 @@ dependencies {
 	compile files(poiDir + '/lib/main-tests/junit-platform-launcher-1.7.1.jar')
 	compile files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
 	compile files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
-	compile files(poiDir + '/lib/ooxml/xmlbeans-5.0.1.jar')
+	compile files(poiDir + '/lib/ooxml/xmlbeans-5.0.2.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-bridge-1.14.jar')
