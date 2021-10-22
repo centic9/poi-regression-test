@@ -323,3 +323,16 @@ static def getDateTime() {
 
 test.dependsOn enhance
 check.dependsOn poiIntegrationTest
+
+task checkPOIJars {
+        doLast() {
+                System.out.println("Looking for Apache POI binaries in directory " + poiDir);
+                assert file (poiDir + '/build/dist/maven/').exists()
+                assert file (poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar').exists()
+                assert file (poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar').exists()
+                assert file (poiDir + '/build/dist/maven/poi-ooxml-full/poi-ooxml-full-' + poiVersion + '.jar').exists()
+                assert file (poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar').exists()
+                assert file (poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar').exists()
+        }
+}
+compileJava.dependsOn checkPOIJars
