@@ -74,7 +74,7 @@ configurations {
 }
 
 dependencies {
-	compile 'org.dstadler:commons-dost:1.0.0.34'
+	compile 'org.dstadler:commons-dost:1.0.0.36'
 	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
 	compile 'com.fasterxml.jackson.core:jackson-core:2.13.0'
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
