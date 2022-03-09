@@ -23,7 +23,7 @@ configurations.all {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.2.1-SNAPSHOT'
+def poiVersion = '5.2.1'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
@@ -85,7 +85,7 @@ dependencies {
 	compile 'com.google.code.gson:gson:2.8.9'
 	compile 'org.apache.velocity:velocity:1.7'
 
-	compile 'org.apache.openjpa:openjpa:3.2.0'
+	compile 'org.apache.openjpa:openjpa:3.2.1'
 	runtime 'org.apache.commons:commons-dbcp2:2.9.0'
 	compile 'org.apache.derby:derbynet:10.14.2.0'
 	runtime 'org.apache.derby:derbyclient:10.14.2.0'
@@ -210,7 +210,7 @@ task processFiles(type:JavaExec, dependsOn: compileJava) {
 			//'-XX:+PrintCompilation',
 			'-XX:+PrintCodeCache',
 			'-XX:ReservedCodeCacheSize=100m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
 			// to avoid having strange stacktraces with only the Exception-class
 			'-XX:-OmitStackTraceInFastThrow',
 			// required for JDK 9 to have stuff in javax.xml.bind available
@@ -250,7 +250,7 @@ task processResults(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 	args = [ resultFile ]
 
@@ -263,7 +263,7 @@ task report(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	main = 'org.dstadler.commoncrawl.Report'
@@ -281,7 +281,7 @@ task deduplicate(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx1024m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	main = 'org.dstadler.commoncrawl.Deduplicate'
@@ -295,7 +295,7 @@ task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
@@ -309,7 +309,7 @@ task processResultsToCSV(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.14-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.15-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
