@@ -27,7 +27,7 @@ def poiVersion = '5.2.3-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
-def poiVersionRC = '-5.1.0-RC2'
+def poiVersionRC = '-5.2.0-RC1'
 
 //provide defaults so we do not need to specify them always
 if (!project.hasProperty('resultFile')) {
@@ -113,8 +113,8 @@ dependencies {
 	compile files(poiDir + '/lib/main/commons-collections4-4.4.jar')
 	compile files(poiDir + '/lib/main/commons-math3-3.6.1.jar')
 	compile files(poiDir + '/lib/main/SparseBitSet-1.2.jar')
-	compile files(poiDir + '/lib/main/log4j-api-2.14.0.jar')
-	// causes huge amount of output: compile files(poiDir + '/lib/main-tests/log4j-core-2.14.1.jar')
+	compile files(poiDir + '/lib/main/log4j-api-2.17.2.jar')
+	compile files(poiDir + '/lib/main-tests/log4j-core-2.17.2.jar')
 	compile files(poiDir + '/lib/main-tests/junit-jupiter-api-5.8.2.jar')
 	compile files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.8.2.jar')
 	compile files(poiDir + '/lib/main-tests/junit-jupiter-params-5.8.2.jar')
@@ -123,7 +123,7 @@ dependencies {
 	compile files(poiDir + '/lib/main-tests/junit-platform-launcher-1.8.1.jar')
 	compile files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
 	compile files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
-	compile files(poiDir + '/lib/ooxml/xmlbeans-5.0.2.jar')
+	compile files(poiDir + '/lib/ooxml/xmlbeans-5.0.3.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
 	compile files(poiDir + '/lib/ooxml-batik/batik-bridge-1.14.jar')
@@ -327,7 +327,7 @@ check.dependsOn poiIntegrationTest
 
 task checkPOIJars {
         doLast() {
-                System.out.println("Looking for Apache POI binaries in directory " + poiDir);
+                System.out.println("Looking for Apache POI binaries in directory " + poiDir)
                 assert file (poiDir + '/build/dist/maven/').exists()
                 assert file (poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar').exists()
                 assert file (poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar').exists()
