@@ -74,86 +74,86 @@ configurations {
 }
 
 dependencies {
-	compile 'org.dstadler:commons-dost:1.1.0.1'
-	compile 'org.dstadler:commoncrawldownload:1.0.0.7'
-	compile 'com.fasterxml.jackson.core:jackson-core:2.13.2'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.2'
-	compile 'commons-io:commons-io:2.11.0'
-	compile 'org.apache.commons:commons-lang3:3.12.0'
-	compile 'org.apache.commons:commons-text:1.9'
-	compile 'com.google.code.gson:gson:2.9.0'
-	compile 'org.apache.velocity:velocity:1.7'
+	implementation 'org.dstadler:commons-dost:1.1.0.1'
+	implementation 'org.dstadler:commoncrawldownload:1.0.0.7'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.2'
+	implementation 'commons-io:commons-io:2.11.0'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	implementation 'org.apache.commons:commons-text:1.9'
+	implementation 'com.google.code.gson:gson:2.9.0'
+	implementation 'org.apache.velocity:velocity:1.7'
 
-	compile 'org.apache.openjpa:openjpa:3.2.1'
-	runtime 'org.apache.commons:commons-dbcp2:2.9.0'
-	compile 'org.apache.derby:derbynet:10.14.2.0'
-	runtime 'org.apache.derby:derbyclient:10.14.2.0'
+	implementation 'org.apache.openjpa:openjpa:3.2.1'
+	runtimeOnly 'org.apache.commons:commons-dbcp2:2.9.0'
+	implementation 'org.apache.derby:derbynet:10.14.2.0'
+	runtimeOnly 'org.apache.derby:derbyclient:10.14.2.0'
 
 	// use the desired version of POI
 
 	// Testing with released version of POI
 	/*compile 'org.apache.poi:poi:' + poiVersion
-	compile 'org.apache.poi:poi-ooxml:' + poiVersion
-	compile 'org.apache.poi:poi-scratchpad:' + poiVersion
-	compile 'org.apache.xmlgraphics:batik-all:1.12'*/
+	implementation 'org.apache.poi:poi-ooxml:' + poiVersion
+	implementation 'org.apache.poi:poi-scratchpad:' + poiVersion
+	implementation 'org.apache.xmlgraphics:batik-all:1.12'*/
 
 	// Testing with downloaded pre-release of POI
 	/*compile files(poiDir + '/ooxml-lib/xmlbeans-3.0.2.jar')
 	//compile files('/opt/xmlbeans/build/ar/xbean.jar')
-	compile files(poiDir + '/compile-lib/batik-all-1.12.jar')
-	compile files(poiDir + '/lib/commons-collections4-4.2.jar')
-	compile files(poiDir + '/lib/commons-compress-1.20.jar')
-	compile files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi/poi-' + poiVersion + '.jar')
-	compile files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
-	compile files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml-schemas/poi-ooxml-schemas-' + poiVersion + '.jar')
-	compile files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')*/
+	implementation files(poiDir + '/compile-lib/batik-all-1.12.jar')
+	implementation files(poiDir + '/lib/commons-collections4-4.2.jar')
+	implementation files(poiDir + '/lib/commons-compress-1.20.jar')
+	implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi/poi-' + poiVersion + '.jar')
+	implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
+	implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml-schemas/poi-ooxml-schemas-' + poiVersion + '.jar')
+	implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')*/
 
 	// Testing with latest trunk-POI
-	compile files(poiDir + '/lib/main/commons-collections4-4.4.jar')
-	compile files(poiDir + '/lib/main/commons-math3-3.6.1.jar')
-	compile files(poiDir + '/lib/main/SparseBitSet-1.2.jar')
-	compile files(poiDir + '/lib/main/log4j-api-2.17.2.jar')
-	compile files(poiDir + '/lib/main-tests/log4j-core-2.17.2.jar')
-	compile files(poiDir + '/lib/main-tests/junit-jupiter-api-5.8.2.jar')
-	compile files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.8.2.jar')
-	compile files(poiDir + '/lib/main-tests/junit-jupiter-params-5.8.2.jar')
-	compile files(poiDir + '/lib/main-tests/junit-platform-commons-1.8.1.jar')
-	compile files(poiDir + '/lib/main-tests/junit-platform-engine-1.8.1.jar')
-	compile files(poiDir + '/lib/main-tests/junit-platform-launcher-1.8.1.jar')
-	compile files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
-	compile files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
-	compile files(poiDir + '/lib/ooxml/xmlbeans-5.0.3.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-bridge-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-codec-1.15.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-constants-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-css-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-dom-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-ext-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-gvt-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-i18n-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-parser-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-script-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-shared-resources-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-svg-dom-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-svggen-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-svgrasterizer-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-transcoder-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-util-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/batik-xml-1.14.jar')
-	compile files(poiDir + '/lib/ooxml-batik/xml-apis-ext-1.3.04.jar')
-	compile files(poiDir + '/lib/ooxml-batik/xmlgraphics-commons-2.4.jar')
-	compile files(poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar')
-    compile files(poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
+	implementation files(poiDir + '/lib/main/commons-collections4-4.4.jar')
+	implementation files(poiDir + '/lib/main/commons-math3-3.6.1.jar')
+	implementation files(poiDir + '/lib/main/SparseBitSet-1.2.jar')
+	implementation files(poiDir + '/lib/main/log4j-api-2.17.2.jar')
+	implementation files(poiDir + '/lib/main-tests/log4j-core-2.17.2.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-jupiter-api-5.8.2.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.8.2.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-jupiter-params-5.8.2.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-platform-commons-1.8.1.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.8.1.jar')
+	implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.8.1.jar')
+	implementation files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
+	implementation files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
+	implementation files(poiDir + '/lib/ooxml/xmlbeans-5.0.3.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-bridge-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-codec-1.15.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-constants-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-css-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-dom-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-ext-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-gvt-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-i18n-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-parser-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-script-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-shared-resources-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-svg-dom-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-svggen-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-svgrasterizer-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-transcoder-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-util-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/batik-xml-1.14.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/xml-apis-ext-1.3.04.jar')
+	implementation files(poiDir + '/lib/ooxml-batik/xmlgraphics-commons-2.4.jar')
+	implementation files(poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar')
+    implementation files(poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
     //compile files(poiDir + '/build/dist/maven/poi-ooxml-lite/poi-ooxml-lite-' + poiVersion + '.jar')
-    compile files(poiDir + '/build/dist/maven/poi-ooxml-full/poi-ooxml-full-' + poiVersion + '.jar')
-    compile files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
+    implementation files(poiDir + '/build/dist/maven/poi-ooxml-full/poi-ooxml-full-' + poiVersion + '.jar')
+    implementation files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
 
-	testCompile 'junit:junit:4.13.2'
-	testCompile 'org.apache.ant:ant:1.10.11'
-	testCompile 'org.dstadler:commons-test:1.0.0.19'
+	testImplementation 'junit:junit:4.13.2'
+	testImplementation 'org.apache.ant:ant:1.10.11'
+	testImplementation 'org.dstadler:commons-test:1.0.0.19'
 
 	// we use the integration-test framework from POI here as well
 	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar')
@@ -173,7 +173,7 @@ openjpa {
 }
 
 wrapper {
-    gradleVersion = '6.6.1'
+    gradleVersion = '6.9.2'
 }
 
 test {
