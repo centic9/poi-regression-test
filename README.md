@@ -21,6 +21,10 @@ For syncing the results to a page at people.apache.org, the following additional
 - rsync
 - sshfs
 
+### Grab it
+
+    git clone https://github.com/centic9/poi-regression-test.git
+
 ### Prepare corpus
 
 The corpus of files is not included here, but needs to be available on the machine where
@@ -105,10 +109,6 @@ The following utilities are available for this:
 * `ElasticsearchWriterFromJSON`: Send the information form the json-file to an Elasticsearch instance 
 
 ## Change it
-
-### Grab it
-
-    git clone git://github.com/centic9/poi-regression-test
 
 ### Build it and run tests
 
