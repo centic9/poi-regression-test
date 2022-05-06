@@ -68,11 +68,14 @@ class POIFileScanner {
         System.out.println("Handling " + includedFiles.length + " files");
 
         List<Map.Entry<String, FileHandler>> files = new ArrayList<>();
+		int count = 0;
         for(String file : includedFiles) {
+			count++;
+
             // breaks files with slash in their name on Linux:
             // file = file.replace('\\', '/'); // ... failures/handlers lookup doesn't work on windows otherwise
 
-            FileHandler fileHandler = getFileHandler(rootDir, file);
+            FileHandler fileHandler = getFileHandler(rootDir, file, count + "/" + includedFiles.length + ": ");
 
             files.add(new AbstractMap.SimpleImmutableEntry<>(file, fileHandler));
 
@@ -222,12 +225,12 @@ class POIFileScanner {
      *          is returned if no match is found
      * @throws IOException If determining the file-type fails
      */
-    protected static FileHandler getFileHandler(File rootDir, String file) throws IOException {
+    protected static FileHandler getFileHandler(File rootDir, String file, String prefix) throws IOException {
         FileHandler fileHandler = HANDLERS.get(getExtension(file));
         if(fileHandler == null) {
             // we could not detect a type of file based on the extension, so we
             // need to take a close look at the file
-            fileHandler = detectUnnamedFile(rootDir, file);
+            fileHandler = detectUnnamedFile(rootDir, file, prefix);
         }
         return fileHandler;
     }
@@ -242,7 +245,7 @@ class POIFileScanner {
         return file.substring(pos).toLowerCase(Locale.ROOT);
     }
 
-    static FileHandler detectUnnamedFile(File rootDir, String file) throws IOException {
+    static FileHandler detectUnnamedFile(File rootDir, String file, String prefix) throws IOException {
         File testFile = new File(rootDir, file);
 
         // find out if it looks like OLE2 (HSSF, HSLF, HWPF, ...) or OOXML (XSSF, XSLF, XWPF, ...)
@@ -266,7 +269,7 @@ class POIFileScanner {
                             }
                         }
                     } catch (IOException | RuntimeException e2) {
-                        System.out.println("Could not open POIFSFileSystem for OLE2 file " + testFile + ": " + e + " and " + e2);
+                        System.out.println(prefix + "Could not open POIFSFileSystem for OLE2 file " + testFile + ": " + e + " and " + e2);
                         return NullFileHandler.instance;
                     }
                 }
@@ -286,7 +289,7 @@ class POIFileScanner {
                             }
                         }
                     } catch (IOException | RuntimeException e2) {
-                        System.out.println("Could not open POIFSFileSystem for OOXML file " + testFile + ": " + e + " and " + e2);
+                        System.out.println(prefix + "Could not open POIFSFileSystem for OOXML file " + testFile + ": " + e + " and " + e2);
                         return NullFileHandler.instance;
                     }
                 }
@@ -306,7 +309,7 @@ class POIFileScanner {
                 return NullFileHandler.instance;
         }
 
-        System.out.println("Did not get a handler for extension " + getExtension(file) +
+        System.out.println(prefix + "Did not get a handler for extension " + getExtension(file) +
                 " of file " + file + ": " + magic);
         return NullFileHandler.instance;
     }

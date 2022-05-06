@@ -21,7 +21,8 @@ public class POIFileScannerTest {
     @SuppressForbidden("Just an ignored test")
     public void testInvalidFile() throws IOException, InterruptedException {
         FileHandler fileHandler = POIFileScanner.getFileHandler(new File("../download"),
-                "www.bgs.ac.uk_downloads_directdownload.cfm_id=2362&noexcl=true&t=west_20sussex_20-_20building_20stone_20quarries");
+                "www.bgs.ac.uk_downloads_directdownload.cfm_id=2362&noexcl=true&t=west_20sussex_20-_20building_20stone_20quarries",
+				"test: ");
 
         assertEquals(XSSFFileHandler.class, fileHandler.getClass());
 
