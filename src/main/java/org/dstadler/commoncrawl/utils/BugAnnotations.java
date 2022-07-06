@@ -144,6 +144,8 @@ public class BugAnnotations {
                 "java.lang.IllegalArgumentException: Cannot access 0-based index * in point-array with * items");
         REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File .* excluded because the Zip file is incomplete"),
                 "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because the Zip file is incomplete");
+        REPLACEMENTS.put(Pattern.compile("java.io.IOException: The text piece table is corrupted, expected byte value \\d+ but had \\d+"),
+                "java.io.IOException: The text piece table is corrupted, expected byte value * but had *");
     }
 
     public static String getReplacement(String exception) {

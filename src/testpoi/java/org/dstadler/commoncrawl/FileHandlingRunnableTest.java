@@ -2,15 +2,23 @@ package org.dstadler.commoncrawl;
 
 import org.apache.poi.stress.FileHandler;
 import org.apache.poi.stress.OPCFileHandler;
+import org.apache.poi.stress.XSLFFileHandler;
 import org.apache.poi.stress.XSSFFileHandler;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.concurrent.TimeUnit;
 
 public class FileHandlingRunnableTest {
+	@BeforeClass
+	public static void setUpClass() throws IOException {
+		LoggingUtils.configureLog4j2();
+	}
 
-    @Test
+	@Test
     public void testPrintInfo() {
         FileHandler handler = new OPCFileHandler();
         FileHandlingRunnable runnable = new FileHandlingRunnable(100, "testfile", handler, null, null);
@@ -32,6 +40,18 @@ public class FileHandlingRunnableTest {
                 // simply run with any file so we check that no exception is
                 // reported even if processing the file fails
                 "src/test/resources/test.vm",
+                handler, new StringWriter(), null);
+        runnable.run();
+    }
+
+	@Ignore("Only works when test-corpus is available")
+    @Test
+    public void testFile() {
+        FileHandler handler = new XSLFFileHandler();
+        FileHandlingRunnable runnable = new FileHandlingRunnable(0,
+                // simply run with any file so we check that no exception is
+                // reported even if processing the file fails
+                "/opt/CommonCrawl/download/binaries.templates.cdn.office.net_support_templates_fr-fr_tf56227732_win32.potx",
                 handler, new StringWriter(), null);
         runnable.run();
     }

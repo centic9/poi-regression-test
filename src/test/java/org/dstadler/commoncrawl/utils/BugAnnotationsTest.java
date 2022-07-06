@@ -169,6 +169,10 @@ public class BugAnnotationsTest {
         replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File roadmap2050.eu_attachments_files_georgzachmann_ecf-carbonpricing_5b1_5d.pptx excluded because the Zip file is incomplete");
         assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because the Zip file is incomplete",
                 replacement);
+
+        replacement = BugAnnotations.getReplacement("java.io.IOException: The text piece table is corrupted, expected byte value 2 but had 0");
+        assertEquals("java.io.IOException: The text piece table is corrupted, expected byte value * but had *",
+                replacement);
     }
 
     @Test

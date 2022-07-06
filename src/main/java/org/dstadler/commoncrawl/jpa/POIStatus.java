@@ -54,7 +54,8 @@ import com.google.common.base.Preconditions;
 		"exceptionStacktrace500RC1","exceptionText500RC1","poi500RC1",
 		"exceptionStacktrace500RC2","exceptionText500RC2","poi500RC2",
 		"exceptionStacktrace510RC1","exceptionText510RC1","poi510RC1",
-		"exceptionStacktrace510RC2","exceptionText510RC2","poi510RC2" })
+		"exceptionStacktrace510RC2","exceptionText510RC2","poi510RC2",
+		"exceptionStacktrace520RC1","exceptionText520RC1","poi520RC1" })
 @Entity
 public class POIStatus extends Base {
 	@JsonProperty
@@ -548,6 +549,24 @@ public class POIStatus extends Base {
 	@Basic
 	private long duration510RC2;
 
+	@JsonProperty
+	@Basic
+	private FileStatus poi520RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText520RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace520RC1;
+
+	@JsonProperty
+	@Basic
+	private long duration520RC1;
+
 	public POIStatus() {
 		super();
 	}
@@ -815,6 +834,14 @@ public class POIStatus extends Base {
 		this.poi510RC2 = poi510RC2;
 	}
 
+	public FileStatus getPoi520RC1() {
+		return poi520RC1;
+	}
+
+	public void setPoi520RC1(FileStatus poi520RC1) {
+		this.poi520RC1 = poi520RC1;
+	}
+
 	public void setByVersion(String version, ResultItem item) {
 		final FileStatus status;
 		if(item.isTimeout() ||
@@ -976,6 +1003,11 @@ public class POIStatus extends Base {
 			exceptionText510RC2 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
 			exceptionStacktrace510RC2 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
 			duration510RC2 = item.getDuration();
+		} else if (version.contains("5.2.0-RC1")) {
+			this.poi520RC1 = status;
+			exceptionText520RC1 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace520RC1 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration520RC1 = item.getDuration();
 		} else {
 			throw new IllegalStateException("Unknown version found: " + version);
 		}
