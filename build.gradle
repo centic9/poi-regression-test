@@ -23,11 +23,11 @@ configurations.all {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.2.3-SNAPSHOT'
+def poiVersion = '5.2.4-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
-def poiVersionRC = '-5.2.0-RC1'
+def poiVersionRC = '-5.2.3-RC1'
 
 //provide defaults so we do not need to specify them always
 if (!project.hasProperty('resultFile')) {
@@ -115,12 +115,12 @@ dependencies {
     implementation files(poiDir + '/lib/main/SparseBitSet-1.2.jar')
     implementation files(poiDir + '/lib/main/log4j-api-2.18.0.jar')
     implementation files(poiDir + '/lib/main-tests/log4j-core-2.18.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-jupiter-api-5.9.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.9.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-jupiter-params-5.9.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-platform-commons-1.9.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.9.0.jar')
-	implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-api-5.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-params-5.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-commons-1.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.9.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.9.0.jar')
     implementation files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
     implementation files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
     implementation files(poiDir + '/lib/ooxml/xmlbeans-5.1.1.jar')
