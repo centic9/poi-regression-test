@@ -222,7 +222,14 @@ task processFiles(type:JavaExec, dependsOn: compileJava) {
 			// under "Instructions to run"
 			'-Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine',
 
-			// see XMLBEANS-525: '-Dxbean.disable.locking=true'
+			// see XMLBEANS-525: 
+			// '-Dxbean.disable.locking=true',
+			
+			// https://logging.apache.org/log4j/2.x/manual/configuration.html#AutomaticConfiguration
+			'-Dlog4j2.configurationFile=src/main/resources/log4j2.xml',
+			
+			// https://stackoverflow.com/a/3753034/411846
+			'-Dlog4j.debug'
 	]
 	args = [ resultFile ]
 
