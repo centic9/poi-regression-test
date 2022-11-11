@@ -12,7 +12,7 @@ apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'openjpa'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
@@ -76,13 +76,13 @@ configurations {
 dependencies {
     implementation 'org.dstadler:commons-dost:1.1.0.2'
     implementation 'org.dstadler:commoncrawldownload:1.0.0.7'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.4'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.4'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.0'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'org.apache.commons:commons-text:1.10.0'
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'org.apache.velocity:velocity:1.7'
 
     implementation 'org.apache.openjpa:openjpa:3.2.2'
@@ -122,7 +122,7 @@ dependencies {
     implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.9.0.jar')
     implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.9.0.jar')
     implementation files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
-    implementation files(poiDir + '/lib/ooxml/commons-compress-1.21.jar')
+    implementation files(poiDir + '/lib/ooxml/commons-compress-1.22.jar')
     implementation files(poiDir + '/lib/ooxml/xmlbeans-5.1.1.jar')
     implementation files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
     implementation files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
