@@ -159,7 +159,7 @@ dependencies {
 
 
 	testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.apache.ant:ant:1.10.12'
+    testImplementation 'org.apache.ant:ant:1.10.13'
     testImplementation 'org.dstadler:commons-test:1.0.0.20'
 
 	// we use the integration-test framework from POI here as well
@@ -168,7 +168,7 @@ dependencies {
 	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
 	poiIntegrationTestCompile 'junit:junit:4.13.2'
-	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.12'
+	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.13'
 }
 
 openjpa {
