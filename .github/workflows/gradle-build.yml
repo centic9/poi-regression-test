@@ -14,3 +14,11 @@ on:
 #jobs:
 #  build-and-test:
 #    uses: centic9/actions/.github/workflows/gradle-build.yml@4
+
+# Use an empty job for now
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Just provide information that this build does not do anything currently
+        run: echo Cannot run CI for now as building requires a local checkout and build of Apache POI
