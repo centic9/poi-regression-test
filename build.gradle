@@ -4,7 +4,10 @@ buildscript {
 		maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-		classpath 'com.radcortez.gradle:openjpa-gradle-plugin:3.1.0'
+        // replace with local version to support newer Gradle
+		//classpath 'com.radcortez.gradle:openjpa-gradle-plugin:3.1.0'
+        classpath files('lib/openjpa-gradle-plugin-3.1.1-SNAPSHOT.jar')
+        classpath 'org.apache.openjpa:openjpa:3.2.2'
     }
 }
 
@@ -163,12 +166,12 @@ dependencies {
     testImplementation 'org.dstadler:commons-test:1.0.0.20'
 
 	// we use the integration-test framework from POI here as well
-	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar')
+	poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar')
 	// required for NullPrintStream for now
-	poiIntegrationTestCompile files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
+	poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
-	poiIntegrationTestCompile 'junit:junit:4.13.2'
-	poiIntegrationTestCompile 'org.apache.ant:ant:1.10.13'
+	poiIntegrationTestImplementation 'junit:junit:4.13.2'
+	poiIntegrationTestImplementation 'org.apache.ant:ant:1.10.13'
 }
 
 openjpa {
@@ -180,7 +183,7 @@ openjpa {
 }
 
 wrapper {
-    gradleVersion = '6.9.2'
+    gradleVersion = '7.6'
 }
 
 test {
