@@ -106,7 +106,7 @@ dependencies {
 	//compile files('/opt/xmlbeans/build/ar/xbean.jar')
     implementation files(poiDir + '/compile-lib/batik-all-1.12.jar')
     implementation files(poiDir + '/lib/commons-collections4-4.2.jar')
-    implementation files(poiDir + '/lib/commons-compress-1.20.jar')
+    implementation files(poiDir + '/lib/commons-compress-1.23.jar')
     implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi/poi-' + poiVersion + '.jar')
     implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar')
     implementation files('/tmp/dist.apache.org/repos/dist/dev/poi/' + poiVersion + poiVersionRC + '/maven/poi-ooxml-schemas/poi-ooxml-schemas-' + poiVersion + '.jar')
@@ -125,7 +125,7 @@ dependencies {
     implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.9.0.jar')
     implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.9.0.jar')
     implementation files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
-    implementation files(poiDir + '/lib/ooxml/commons-compress-1.22.jar')
+    implementation files(poiDir + '/lib/ooxml/commons-compress-1.23.jar')
     implementation files(poiDir + '/lib/ooxml/xmlbeans-5.1.1.jar')
     implementation files(poiDir + '/lib/ooxml-batik/batik-anim-1.14.jar')
     implementation files(poiDir + '/lib/ooxml-batik/batik-awt-util-1.14.jar')
@@ -155,6 +155,7 @@ dependencies {
     implementation files(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar')
 
 	// duplicate a few dependencies to not fail when the POI dependencies are updated
+	implementation 'org.apache.commons:commons-compress:1.23.0'
 	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 	implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
 	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
