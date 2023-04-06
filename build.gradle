@@ -244,7 +244,7 @@ task processFiles(type:JavaExec, dependsOn: compileJava) {
 	]
 	args = [ resultFile ]
 
-	main = 'org.dstadler.commoncrawl.ProcessFiles'
+	mainClass = 'org.dstadler.commoncrawl.ProcessFiles'
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
@@ -259,7 +259,7 @@ task processFilesFromJSON(type:JavaExec, dependsOn: compileJava) {
 	]
 	args = [ '/opt/file-type-detection/filetypes.txt']
 
-	main = 'org.dstadler.commoncrawl.ProcessJSONListOfFiles'
+	mainClass = 'org.dstadler.commoncrawl.ProcessJSONListOfFiles'
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
@@ -272,7 +272,7 @@ task processResults(type:JavaExec, dependsOn: compileJava) {
 	]
 	args = [ resultFile ]
 
-	main = 'org.dstadler.commoncrawl.ProcessResults'
+	mainClass = 'org.dstadler.commoncrawl.ProcessResults'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -284,7 +284,7 @@ task report(type:JavaExec, dependsOn: compileJava) {
 			'-javaagent:lib/file-leak-detector-1.16-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
-	main = 'org.dstadler.commoncrawl.Report'
+	mainClass = 'org.dstadler.commoncrawl.Report'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -302,7 +302,7 @@ task deduplicate(type:JavaExec, dependsOn: compileJava) {
 			'-javaagent:lib/file-leak-detector-1.16-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
-	main = 'org.dstadler.commoncrawl.Deduplicate'
+	mainClass = 'org.dstadler.commoncrawl.Deduplicate'
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
@@ -317,7 +317,7 @@ task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
-	main = 'org.dstadler.commoncrawl.utils.ElasticsearchWriterFromJSON'
+	mainClass = 'org.dstadler.commoncrawl.utils.ElasticsearchWriterFromJSON'
 	args = [ esHost, esUser, esPassword ]
 	classpath = sourceSets.main.runtimeClasspath
 }
@@ -331,7 +331,7 @@ task processResultsToCSV(type:JavaExec, dependsOn: compileJava) {
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
-	main = 'org.dstadler.commoncrawl.utils.ProcessResultsToCSV'
+	mainClass = 'org.dstadler.commoncrawl.utils.ProcessResultsToCSV'
 	args = [ resultFile ]
 	classpath = sourceSets.main.runtimeClasspath
 }
