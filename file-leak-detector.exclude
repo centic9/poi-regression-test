@@ -70,3 +70,4 @@ org.apache.log4j.FileAppender.setFile
 sun.launcher.LauncherHelper.validateMainClass
 sun.util.locale.provider.RuleBasedBreakIterator$1.run2
 java.util.ServiceLoader$LazyIterator.hasNextService
+jdk.internal.loader.URLClassPath$JarLoader.getJarFile
