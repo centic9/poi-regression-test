@@ -5,8 +5,8 @@ buildscript {
     }
     dependencies {
         // replace with local version to support newer Gradle
-		//classpath 'com.radcortez.gradle:openjpa-gradle-plugin:3.1.0'
-        classpath files('lib/openjpa-gradle-plugin-3.1.1-SNAPSHOT.jar')
+		classpath 'com.radcortez.gradle:openjpa-gradle-plugin:3.2.0'
+        //classpath files('lib/openjpa-gradle-plugin-3.1.1-SNAPSHOT.jar')
         classpath 'org.apache.openjpa:openjpa:3.2.2'
     }
 }
