@@ -173,6 +173,10 @@ public class BugAnnotationsTest {
         replacement = BugAnnotations.getReplacement("java.io.IOException: The text piece table is corrupted, expected byte value 2 but had 0");
         assertEquals("java.io.IOException: The text piece table is corrupted, expected byte value * but had *",
                 replacement);
+
+        replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File download.oldindex/ar.gov.ttn.www_normas_descargas_Planilla_Valores_Venales.xls excluded because it is password-encrypted");
+        assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is password-encrypted",
+                replacement);
     }
 
     @Test

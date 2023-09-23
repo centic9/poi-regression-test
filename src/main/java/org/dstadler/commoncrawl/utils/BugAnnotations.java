@@ -146,6 +146,8 @@ public class BugAnnotations {
                 "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because the Zip file is incomplete");
         REPLACEMENTS.put(Pattern.compile("java.io.IOException: The text piece table is corrupted, expected byte value \\d+ but had \\d+"),
                 "java.io.IOException: The text piece table is corrupted, expected byte value * but had *");
+        REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File .* excluded because it is password-encrypted"),
+                "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is password-encrypted");
     }
 
     public static String getReplacement(String exception) {
