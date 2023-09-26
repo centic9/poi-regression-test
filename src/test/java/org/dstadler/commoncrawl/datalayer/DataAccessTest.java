@@ -69,8 +69,10 @@ public class DataAccessTest extends DatabaseBase {
 
 	@After
 	public void close() {
-		access.commitTransaction();
-		access.close();
+		if (access != null) {
+			access.commitTransaction();
+			access.close();
+		}
 	}
 
 	@Test
