@@ -2,9 +2,9 @@
 .gradle/
 .project
 bin/
-build/
-TestCommonCrawl/
-CommonCrawl/
+/build/
+/TestCommonCrawl/
+/CommonCrawl/
 derby.log
 CommonCrawl.log
 /result-*.json
