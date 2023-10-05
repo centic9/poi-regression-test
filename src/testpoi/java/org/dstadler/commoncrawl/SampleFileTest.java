@@ -1,6 +1,5 @@
 package org.dstadler.commoncrawl;
 
-import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.stress.FileHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
