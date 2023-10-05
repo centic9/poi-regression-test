@@ -59,7 +59,7 @@ public class SampleFileTest {
 
             try {
                 handler.handleExtracting(fileIO);
-            } catch (InvalidOperationException e) {
+            } catch (IOException e) {
                 if (e.getCause() != null && !e.getCause().getMessage().equals("Truncated ZIP file")) {
                     throw e;
                 }
