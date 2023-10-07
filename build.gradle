@@ -77,12 +77,12 @@ configurations {
 }
 
 dependencies {
-    implementation 'org.dstadler:commons-dost:1.2.0.2'
+    implementation 'org.dstadler:commons-dost:1.2.0.3'
     implementation 'org.dstadler:commoncrawldownload:1.0.0.7'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.15.2'
-    implementation 'commons-io:commons-io:2.13.0'
+    implementation 'commons-io:commons-io:2.14.0'
     implementation 'org.apache.commons:commons-lang3:3.13.0'
     implementation 'org.apache.commons:commons-text:1.10.0'
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -90,7 +90,7 @@ dependencies {
 
     implementation 'org.apache.openjpa:openjpa:3.2.2'
     runtimeOnly 'org.apache.commons:commons-dbcp2:2.10.0'
-	runtimeOnly 'org.apache.commons:commons-pool2:2.11.1'
+	runtimeOnly 'org.apache.commons:commons-pool2:2.12.0'
     implementation 'org.apache.derby:derbynet:10.14.2.0'
     runtimeOnly 'org.apache.derby:derbyclient:10.14.2.0'
 
@@ -164,7 +164,7 @@ dependencies {
 	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
 
 
-	testImplementation 'junit:junit:4.13.2'
+	testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
     testImplementation 'org.apache.ant:ant:1.10.14'
     testImplementation 'org.dstadler:commons-test:1.0.0.20'
 
@@ -173,7 +173,7 @@ dependencies {
 	// required for NullPrintStream for now
 	poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
 	// dependencies for the Integration-Test part
-	poiIntegrationTestImplementation 'junit:junit:4.13.2'
+	poiIntegrationTestImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
 	poiIntegrationTestImplementation 'org.apache.ant:ant:1.10.14'
 }
 
