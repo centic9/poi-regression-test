@@ -225,7 +225,7 @@ task processFiles(type:JavaExec, dependsOn: compileJava) {
 			//'-XX:+PrintCompilation',
 			'-XX:+PrintCodeCache',
 			'-XX:ReservedCodeCacheSize=100m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
 			// to avoid having strange stacktraces with only the Exception-class
 			'-XX:-OmitStackTraceInFastThrow',
 			// required for JDK 9 to have stuff in javax.xml.bind available
@@ -272,7 +272,7 @@ task processResults(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 	args = [ resultFile ]
 
@@ -285,7 +285,7 @@ task report(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.Report'
@@ -303,7 +303,7 @@ task deduplicate(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx1024m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.Deduplicate'
@@ -317,7 +317,7 @@ task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
@@ -331,7 +331,7 @@ task processResultsToCSV(type:JavaExec, dependsOn: compileJava) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.17-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
