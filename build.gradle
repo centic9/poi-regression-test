@@ -23,7 +23,7 @@ repositories {
 	mavenCentral()
 }
 
-configurations.all {
+configurations.configureEach {
 	all*.exclude group: 'org.apache.hadoop'		// not found on Maven Central?
 }
 
@@ -214,7 +214,8 @@ tasks.register('poiIntegrationTest', Test) {
 	shouldRunAfter test
 }
 
-task processFiles(type:JavaExec, dependsOn: compileJava) {
+tasks.register('processFiles', JavaExec) {
+	dependsOn compileJava
 	description = 'Iterates over all files in the download-dir and calls the POI integration test on them, recording failures in a json-file'
 
 	jvmArgs = [
@@ -246,13 +247,14 @@ task processFiles(type:JavaExec, dependsOn: compileJava) {
 			// https://stackoverflow.com/a/3753034/411846
 			'-Dlog4j.debug'
 	]
-	args = [ resultFile ]
+	args = [resultFile]
 
 	mainClass = 'org.dstadler.commoncrawl.ProcessFiles'
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
-task processFilesFromJSON(type:JavaExec, dependsOn: compileJava) {
+tasks.register('processFilesFromJSON', JavaExec) {
+	dependsOn compileJava
 	description = 'Iterates over all files in the given JSON-file and calls the POI integration test on them, recording failures in a json-file'
 
 	jvmArgs = [
@@ -261,26 +263,28 @@ task processFilesFromJSON(type:JavaExec, dependsOn: compileJava) {
 			'-XX:-OmitStackTraceInFastThrow',
 			'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
-	args = [ Os.isFamily(Os.FAMILY_WINDOWS) ? 'C:/workspaces/file-type-detection/filetypes.txt' : '/opt/file-type-detection/filetypes.txt']
+	args = [Os.isFamily(Os.FAMILY_WINDOWS) ? 'C:/workspaces/file-type-detection/filetypes.txt' : '/opt/file-type-detection/filetypes.txt']
 
 	mainClass = 'org.dstadler.commoncrawl.ProcessJSONListOfFiles'
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
-task processResults(type:JavaExec, dependsOn: compileJava) {
+tasks.register('processResults', JavaExec) {
+	dependsOn compileJava
 	description = 'Updates the database with the latest results that are stored in a result-file'
 
 	jvmArgs = [
 			'-Xmx512m',
 			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
-	args = [ resultFile ]
+	args = [resultFile]
 
 	mainClass = 'org.dstadler.commoncrawl.ProcessResults'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
-task report(type:JavaExec, dependsOn: compileJava) {
+tasks.register('report', JavaExec) {
+	dependsOn compileJava
 	description = 'Generates the report by reading from the database'
 
 	jvmArgs = [
@@ -292,13 +296,14 @@ task report(type:JavaExec, dependsOn: compileJava) {
 	classpath = sourceSets.main.runtimeClasspath
 }
 
-task syncReport(type:Exec) {
+tasks.register('syncReport', Exec) {
 	description = 'Publish resulting HTML files on the Apache server'
 
-    commandLine './syncReport.sh'
+	commandLine './syncReport.sh'
 }
 
-task deduplicate(type:JavaExec, dependsOn: compileJava) {
+tasks.register('deduplicate', JavaExec) {
+	dependsOn compileJava
 	description = 'Compare available files in ../download and move duplicate ones to ../backup to not re-process the same content over and over again'
 
 	jvmArgs = [
@@ -310,7 +315,8 @@ task deduplicate(type:JavaExec, dependsOn: compileJava) {
 	classpath = sourceSets.poiIntegrationTest.runtimeClasspath
 }
 
-task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
+tasks.register('exportToElasticsearchFromJSON', JavaExec) {
+	dependsOn compileJava
 	description = 'Uses a JSON export of the Database with POIStatus objects to write the data to Elasticsearch. ' +
 			'See ElasticsearchWriterFromJSON.java for details. ' +
 			'Call with ./gradlew -PesHost=host -PesUser=user -PesPassword=pwd exportToElasticsearchFromJSON'
@@ -318,25 +324,26 @@ task exportToElasticsearchFromJSON(type:JavaExec, dependsOn: compileJava) {
 	jvmArgs = [
 			'-Xmx2048m',
 			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
-            		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
+			'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.utils.ElasticsearchWriterFromJSON'
-	args = [ esHost, esUser, esPassword ]
+	args = [esHost, esUser, esPassword]
 	classpath = sourceSets.main.runtimeClasspath
 }
 
-task processResultsToCSV(type:JavaExec, dependsOn: compileJava) {
+tasks.register('processResultsToCSV', JavaExec) {
+	dependsOn compileJava
 	description = 'Reads the result-file and convers the JSON format to a CSV file'
 
 	jvmArgs = [
 			'-Xmx2048m',
 			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
-            		'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
+			'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.utils.ProcessResultsToCSV'
-	args = [ resultFile ]
+	args = [resultFile]
 	classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -347,15 +354,15 @@ static def getDateTime() {
 test.dependsOn enhance
 check.dependsOn poiIntegrationTest
 
-task checkPOIJars {
-        doLast() {
-                System.out.println("Looking for Apache POI binaries in directory " + poiDir)
-                assert file (poiDir + '/build/dist/maven/').exists()
-                assert file (poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar').exists()
-                assert file (poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar').exists()
-                assert file (poiDir + '/build/dist/maven/poi-ooxml-full/poi-ooxml-full-' + poiVersion + '.jar').exists()
-                assert file (poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar').exists()
-                assert file (poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar').exists()
-        }
+tasks.register('checkPOIJars') {
+	doLast() {
+		System.out.println("Looking for Apache POI binaries in directory " + poiDir)
+		assert file(poiDir + '/build/dist/maven/').exists()
+		assert file(poiDir + '/build/dist/maven/poi/poi-' + poiVersion + '.jar').exists()
+		assert file(poiDir + '/build/dist/maven/poi-ooxml/poi-ooxml-' + poiVersion + '.jar').exists()
+		assert file(poiDir + '/build/dist/maven/poi-ooxml-full/poi-ooxml-full-' + poiVersion + '.jar').exists()
+		assert file(poiDir + '/build/dist/maven/poi-scratchpad/poi-scratchpad-' + poiVersion + '.jar').exists()
+		assert file(poiDir + '/build/dist/maven/poi-integration-tests/poi-integration-' + poiVersion + '-tests.jar').exists()
+	}
 }
 compileJava.dependsOn checkPOIJars
