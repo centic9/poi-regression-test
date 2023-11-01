@@ -6,7 +6,6 @@ import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseBase;
 import org.dstadler.commoncrawl.jpa.FileStatus;
 import org.dstadler.commoncrawl.jpa.POIStatus;
-import org.dstadler.commoncrawl.report.BaseReport;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
