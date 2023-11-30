@@ -21,6 +21,7 @@ sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	maven { url "https://repository.apache.org/content/groups/staging/" }
 }
 
 configurations.configureEach {
@@ -28,11 +29,11 @@ configurations.configureEach {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.2.5'
+def poiVersion = '5.2.6-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
-def poiVersionRC = '-5.2.5-RC1'
+def poiVersionRC = '-5.2.6-RC1'
 
 //provide defaults so we do not need to specify them always
 if (!project.hasProperty('resultFile')) {
@@ -99,8 +100,9 @@ dependencies {
 	// use the desired version of POI
 
 	// Testing with released version of POI
-	/*compile 'org.apache.poi:poi:' + poiVersion
+	/*implementation 'org.apache.poi:poi:' + poiVersion
     implementation 'org.apache.poi:poi-ooxml:' + poiVersion
+    //implementation 'org.apache.poi:poi-ooxml-full:' + poiVersion
     implementation 'org.apache.poi:poi-scratchpad:' + poiVersion
     implementation 'org.apache.xmlgraphics:batik-all:1.12'*/
 
