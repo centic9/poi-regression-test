@@ -39,20 +39,12 @@ For testing, you can use the files included in the Apache POI source repository 
 
 Compile the jars for Apache POI to use them as part of the test-run.
 
-For Apache POI before 5.0.0:
-
-    cd /opt/poi
-    ant jar integration-test-jar
-    
-For Apache POI 5.0.0 and newer:
-
-    cd /opt/poi
-    ant jar compile-integration
-
 For Apache POI 5.1.0 and newer:
 
     cd /opt/poi
     ./gradlew jar :poi-integration:testJar
+
+Before 5.0.0, use `integration-test-jar`. Between 5.0.0 and 5.1.0, use `compile-integration 
 
 ### Set up test
 
