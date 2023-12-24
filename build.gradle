@@ -85,7 +85,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.15.2'
-    implementation 'commons-io:commons-io:2.15.0'
+    implementation 'commons-io:commons-io:2.15.1'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'org.apache.commons:commons-text:1.11.0'
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -190,7 +190,7 @@ openjpa {
 }
 
 wrapper {
-    gradleVersion = '7.6.1'
+    gradleVersion = '8.5'
 }
 
 test {
