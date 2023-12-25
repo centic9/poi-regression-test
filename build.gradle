@@ -207,6 +207,8 @@ jacoco {
 	toolVersion = '0.8.11'
 }
 
+compilePoiIntegrationTestJava.dependsOn compileJava
+
 tasks.register('poiIntegrationTest', Test) {
 	description = 'Runs integration tests.'
 	group = 'verification'
