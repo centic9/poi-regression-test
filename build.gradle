@@ -234,7 +234,7 @@ tasks.register('processFiles', JavaExec) {
 			//'-XX:+PrintCompilation',
 			'-XX:+PrintCodeCache',
 			'-XX:ReservedCodeCacheSize=100m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
 			// to avoid having strange stacktraces with only the Exception-class
 			'-XX:-OmitStackTraceInFastThrow',
 			// required for JDK 9 to have stuff in javax.xml.bind available
@@ -283,7 +283,7 @@ tasks.register('processResults', JavaExec) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 	args = [resultFile]
 
@@ -297,7 +297,7 @@ tasks.register('report', JavaExec) {
 
 	jvmArgs = [
 			'-Xmx512m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.Report'
@@ -316,7 +316,7 @@ tasks.register('deduplicate', JavaExec) {
 
 	jvmArgs = [
 			'-Xmx1024m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
 	]
 
 	mainClass = 'org.dstadler.commoncrawl.Deduplicate'
@@ -331,7 +331,7 @@ tasks.register('exportToElasticsearchFromJSON', JavaExec) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
 			'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
@@ -346,7 +346,7 @@ tasks.register('processResultsToCSV', JavaExec) {
 
 	jvmArgs = [
 			'-Xmx2048m',
-			'-javaagent:lib/file-leak-detector-1.18-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+			'-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
 			'-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
 	]
 
