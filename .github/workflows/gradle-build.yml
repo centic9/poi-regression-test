@@ -4,16 +4,16 @@ name: Build and check
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
   # Allows to run from the Actions tab
   workflow_dispatch:
 
 # Disabled as it requires a local build of Apache POI
 #jobs:
 #  build-and-test:
-#    uses: centic9/actions/.github/workflows/gradle-build.yml@4
+#    uses: centic9/actions/.github/workflows/gradle-build.yml@7
 
 # Use an empty job for now
 jobs:
