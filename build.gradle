@@ -44,7 +44,7 @@ if (!project.hasProperty('resultFile')) {
     ext.resultFile = 'result-' + poiVersion + poiVersionRC + '-' + getDateTime() + '.json'
 }
 if (!project.hasProperty('poiDir')) {
-    ext.poiDir = Os.isFamily(Os.FAMILY_WINDOWS) ? 'C:/workspaces/poi' : '/opt/poi'
+    ext.poiDir = Os.isFamily(Os.FAMILY_WINDOWS) ? 'Z:/workspaces/poi' : '/opt/poi'
 }
 if (!project.hasProperty('esHost')) {
     ext.esHost = 'localhost'
