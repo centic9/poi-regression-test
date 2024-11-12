@@ -53,8 +53,8 @@ public class Report extends BaseReport {
         long statusCount = access.countStatus("m.poi315VM is null");
         log.info("Having " + statusCount + " Status-Items before starting to write");
 
-        String versionBefore = "5.2.5RC1";
-        String versionNow =    "5.3.0RC1";
+        String versionBefore = "5.3.0RC1";
+        String versionNow =    "5.4.0RC1";
         report(access, statusCount, "index.html", "index.html",
                 versionBefore, versionNow, "POI315VM is null", true);
 

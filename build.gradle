@@ -33,11 +33,11 @@ configurations.configureEach {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.4.0-SNAPSHOT'
+def poiVersion = '5.4.0'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
-def poiVersionRC = '-5.3.0-RC1'
+def poiVersionRC = '-5.4.0-RC1'
 
 //provide defaults so we do not need to specify them always
 if (!project.hasProperty('resultFile')) {
