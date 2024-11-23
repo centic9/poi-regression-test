@@ -13,7 +13,7 @@ on:
 # Disabled as it requires a local build of Apache POI
 #jobs:
 #  build-and-test:
-#    uses: centic9/actions/.github/workflows/gradle-build.yml@7
+#    uses: centic9/actions/.github/workflows/gradle-build.yml@8
 
 # Use an empty job for now
 jobs:
