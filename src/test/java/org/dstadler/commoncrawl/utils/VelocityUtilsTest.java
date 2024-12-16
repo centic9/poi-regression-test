@@ -1,7 +1,7 @@
 package org.dstadler.commoncrawl.utils;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,12 +15,12 @@ import org.apache.log4j.LogManager;
 import org.apache.tools.ant.taskdefs.Move;
 import org.dstadler.commoncrawl.report.ReportItem;
 import org.dstadler.commoncrawl.jpa.FileStatus;
-import org.junit.AfterClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 
 
 public class VelocityUtilsTest {
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         LogManager.shutdown();
     }
@@ -44,8 +44,8 @@ public class VelocityUtilsTest {
             assertTrue(file.exists());
 
             String content = FileUtils.readFileToString(file, "UTF-8");
-            assertTrue("Had: " + content,
-                    content.contains("This is a test: 3"));
+            assertTrue(content.contains("This is a test: 3"),
+                    "Had: " + content);
         } finally {
             assertTrue(!file.exists() || file.delete());
         }
@@ -93,8 +93,8 @@ public class VelocityUtilsTest {
             assertTrue(file.exists());
 
             String content = FileUtils.readFileToString(file, "UTF-8");
-            assertTrue("Had: " + content,
-                    content.contains("Having <mark>3</mark> different"));
+            assertTrue(content.contains("Having <mark>3</mark> different"),
+                    "Had: " + content);
         } finally {
             assertTrue(!file.exists() || file.delete());
         }

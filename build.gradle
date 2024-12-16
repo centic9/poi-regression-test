@@ -173,8 +173,9 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-core:2.24.2'
     implementation 'com.github.virtuald:curvesapi:1.08'
 
-
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
     testImplementation 'org.apache.ant:ant:1.10.15'
     testImplementation 'org.dstadler:commons-test:1.0.0.21'
 
@@ -183,7 +184,7 @@ dependencies {
     // required for NullPrintStream for now
     poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
     // dependencies for the Integration-Test part
-    poiIntegrationTestImplementation 'org.junit.vintage:junit-vintage-engine:5.11.3'
+    poiIntegrationTestImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
     poiIntegrationTestImplementation 'org.apache.ant:ant:1.10.15'
 }
 
@@ -207,6 +208,7 @@ test {
 
     // http://forums.gradle.org/gradle/topics/jacoco_related_failure_in_multiproject_build
     systemProperties['user.dir'] = workingDir
+    useJUnitPlatform()
 }
 
 jacoco {

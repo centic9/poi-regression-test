@@ -1,21 +1,21 @@
 package org.dstadler.commoncrawl.datalayer;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DatabaseBase {
 	public static DatabaseStarter starter = new DatabaseStarter();
 
-	@BeforeClass
+	@BeforeAll
 	public static void startDB() throws IOException {
 		starter.start();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void stopDB() {
 		assertTrue(starter.stop());
 

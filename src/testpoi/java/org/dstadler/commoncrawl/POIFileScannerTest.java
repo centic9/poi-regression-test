@@ -3,20 +3,20 @@ package org.dstadler.commoncrawl;
 import org.apache.poi.stress.FileHandler;
 import org.apache.poi.stress.XSSFFileHandler;
 import org.apache.poi.util.SuppressForbidden;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class POIFileScannerTest {
     private final static File ROOT_DIR = new File("src/testpoi/resources");
 
-    @Ignore("Only works when commoncrawl-corpus is available")
+    @Disabled("Only works when commoncrawl-corpus is available")
     @Test
     @SuppressForbidden("Just an ignored test")
     public void testInvalidFile() throws IOException, InterruptedException {
@@ -37,7 +37,6 @@ public class POIFileScannerTest {
     @Test
     public void test() throws IOException {
         Collection<Map.Entry<String, FileHandler>> scan = POIFileScanner.scan(ROOT_DIR);
-        assertEquals("There are 3 files in the src/testpoi/resources directory",
-                3, scan.size());
+        assertEquals(3, scan.size(), "There are 3 files in the src/testpoi/resources directory");
     }
 }

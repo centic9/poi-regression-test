@@ -4,28 +4,28 @@ import org.dstadler.commoncrawl.elasticsearch.ElasticsearchWriter;
 import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commons.http.HttpClientWrapper;
 import org.dstadler.commons.testing.MockRESTServer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ElasticsearchWriterTest {
     private final AtomicInteger called = new AtomicInteger();
     private MockRESTServer server;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         server = new MockRESTServer(
                 called::incrementAndGet,
                 "200", "application/json", "{\"acknowledged\":true}");
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         if(server != null) {
             server.close();

@@ -1,9 +1,8 @@
 package org.dstadler.commoncrawl;
 
 import org.apache.poi.stress.FileHandler;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -15,15 +14,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(Parameterized.class)
 public class SampleFileTest {
-
     public static final File ROOT_DIR = new File("src/testpoi/resources");
 
-    @Parameterized.Parameters(name = "File: {0}, Handler: {1}")
     public static Collection<Object[]> data() throws IOException {
         Collection<Map.Entry<String, FileHandler>> files = POIFileScanner.scan(ROOT_DIR);
         assertNotNull(files);
@@ -37,13 +33,9 @@ public class SampleFileTest {
         return params;
     }
 
-    @Parameterized.Parameter
-    public String file;
-    @Parameterized.Parameter(1)
-    public FileHandler handler;
-
-    @Test
-    public void test() throws Exception {
+    @MethodSource("data")
+    @ParameterizedTest(name = "File: {0}, Handler: {1}")
+    public void test(String file, FileHandler handler) throws Exception {
         System.out.println("Handling file: " + file);
         File fileIO = new File(ROOT_DIR, file);
         try (InputStream stream = new BufferedInputStream(new FileInputStream(fileIO), 1024 * 100)) {

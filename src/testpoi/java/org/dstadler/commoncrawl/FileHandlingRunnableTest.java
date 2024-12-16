@@ -4,16 +4,16 @@ import org.apache.poi.stress.FileHandler;
 import org.apache.poi.stress.OPCFileHandler;
 import org.apache.poi.stress.XSLFFileHandler;
 import org.apache.poi.stress.XSSFFileHandler;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.concurrent.TimeUnit;
 
 public class FileHandlingRunnableTest {
-	@BeforeClass
+	@BeforeAll
 	public static void setUpClass() throws IOException {
 		LoggingUtils.configureLog4j2();
 	}
@@ -44,7 +44,7 @@ public class FileHandlingRunnableTest {
         runnable.run();
     }
 
-	@Ignore("Only works when test-corpus is available")
+	@Disabled("Only works when test-corpus is available")
     @Test
     public void testFile() {
         FileHandler handler = new XSLFFileHandler();

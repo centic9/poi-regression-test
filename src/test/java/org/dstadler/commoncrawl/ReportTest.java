@@ -9,7 +9,7 @@ import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commoncrawl.report.BaseReport;
 import org.dstadler.commoncrawl.report.OverviewItem;
 import org.dstadler.commoncrawl.report.ReportItem;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReportTest {
     public static final File RESULT_FILE = new File("build/testReport.html");
@@ -38,8 +36,8 @@ public class ReportTest {
             access.commitTransaction();
 
             long statusCount = access.countStatus("m.poi315VM is null");
-            assertTrue("Should have some POIStatus entries now",
-                    statusCount > 0);
+            assertTrue(statusCount > 0,
+                    "Should have some POIStatus entries now");
 
             //noinspection unchecked,SqlDialectInspection,SqlNoDataSourceInspection
             List<Object[]> results = access.getEm().createNativeQuery(

@@ -6,24 +6,22 @@ import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseBase;
 import org.dstadler.commoncrawl.jpa.FileStatus;
 import org.dstadler.commoncrawl.jpa.POIStatus;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.TypedQuery;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class BaseReportTest extends DatabaseBase {
     // clean out existing entries first before and after the test
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     public void setUp() {
         try (DataAccess access = DataAccessFactory.getInstance(DataAccessFactory.DB_TEST)) {
             access.startTransaction();
@@ -39,10 +37,10 @@ public class BaseReportTest extends DatabaseBase {
 
     @Test
     public void testRegressionData() throws Exception {
-        assumeTrue("Need the corpus available at " + BaseReport.ROOT_DIR,
-                BaseReport.ROOT_DIR.exists());
-        assumeTrue("Need a corpus-directory available at " + BaseReport.ROOT_DIR,
-                BaseReport.ROOT_DIR.isDirectory());
+        assumeTrue(BaseReport.ROOT_DIR.exists(),
+                "Need the corpus available at " + BaseReport.ROOT_DIR);
+        assumeTrue(BaseReport.ROOT_DIR.isDirectory(),
+                "Need a corpus-directory available at " + BaseReport.ROOT_DIR);
 
         try (DataAccess access = DataAccessFactory.getInstance(DataAccessFactory.DB_TEST)) {
 
@@ -65,8 +63,8 @@ public class BaseReportTest extends DatabaseBase {
             }
 
             File destFile = new File(BaseReport.REPORT_DIR, file.getName());
-            assertFalse("Source is not available during report-generation, so should not find: " + destFile.getAbsolutePath(),
-                    destFile.exists());
+            assertFalse(destFile.exists(),
+                    "Source is not available during report-generation, so should not find: " + destFile.getAbsolutePath());
         }
     }
 

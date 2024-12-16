@@ -1,25 +1,25 @@
 package org.dstadler.commoncrawl;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class TikaTest {
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testFileTypeDetectionCC() {
         //runFiles(new File("../download"), true);
     }
 
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testFileTypeDetectionTimVM() {
         //runFiles(new File("../TimVM"), false);
     }
 
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testFileTypeDetectionPOI() {
         //runFiles(new File("/opt/poi"), true);
@@ -54,19 +54,19 @@ public class TikaTest {
         System.out.println("Had: " + types.sortedMap().toString());
     }*/
 
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testMimeTypeToFileHandlerPOI() {
         //runMimeTypeToFileHandler(new File("/opt/poi/test-data"), true);
     }
 
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testMimeTypeToFileHandlerTimVM() {
         //runMimeTypeToFileHandler(new File("../TimVM"), false);
     }
 
-    @Ignore("Only used for verification, test depends on local files")
+    @Disabled("Only used for verification, test depends on local files")
     @Test
     public void testMimeTypeToFileHandlerCC() {
         //runMimeTypeToFileHandler(new File("../download"), false);
@@ -185,7 +185,7 @@ public class TikaTest {
         IGNORED_MIMETYPES.add("application/vnd.google-earth.kml+xml");
     }
 
-    @Ignore("Only a local test")
+    @Disabled("Only a local test")
     @Test
     public void testOneFile() {
         /*TikaFileTypeDetector detector = new TikaFileTypeDetector();

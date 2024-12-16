@@ -1,20 +1,15 @@
 package org.dstadler.commoncrawl.datalayer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.dstadler.commoncrawl.jpa.FileStatus;
 import org.dstadler.commoncrawl.jpa.FileURL;
 import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commons.testing.TestHelpers;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -25,7 +20,7 @@ public class DataAccessTest extends DatabaseBase {
 	private final String LONG_STR = StringUtils.repeat("a", 8096);
 	private final String OVERLONG_STR = StringUtils.repeat("a", 8096+1);
 
-	@Before
+	@BeforeEach
 	public void create() {
 		access = DataAccessFactory.getInstance(DataAccessFactory.DB_TEST);
 
@@ -51,9 +46,9 @@ public class DataAccessTest extends DatabaseBase {
 		// check
 		for(int i = 0;i < 100;i++) {
 			String url = "url" + i;
-			assertNull("Should not have urls any more, but had " + url, access.getURL(url));
+			assertNull(access.getURL(url), "Should not have urls any more, but had " + url);
 		}
-		assertNull("Should not have LONG_STR any more", access.getURL(LONG_STR));
+		assertNull(access.getURL(LONG_STR), "Should not have LONG_STR any more");
 	}
 
 	private void removeIfExists(String urlStr) {
@@ -67,7 +62,7 @@ public class DataAccessTest extends DatabaseBase {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void close() {
 		if (access != null) {
 			access.commitTransaction();
@@ -195,8 +190,7 @@ public class DataAccessTest extends DatabaseBase {
 
 		List<String> filenames = q.getResultList();
 
-		assertEquals("Found files: " + filenames,
-				0, access.countStatus(null));
+		assertEquals(0, access.countStatus(null), "Found files: " + filenames);
 
 		POIStatus status = new POIStatus("file1");
 		access.writePOIStatus(status);

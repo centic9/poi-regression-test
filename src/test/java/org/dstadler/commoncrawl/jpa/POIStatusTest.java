@@ -1,11 +1,11 @@
 package org.dstadler.commoncrawl.jpa;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.dstadler.commoncrawl.ResultItem;
 import org.dstadler.commons.testing.TestHelpers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 

@@ -4,8 +4,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.stress.FileHandler;
 import org.apache.poi.stress.HSLFFileHandler;
 import org.apache.poi.stress.XWPFFileHandler;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -18,10 +18,7 @@ import java.io.Writer;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProcessFilesTest {
 	private Writer stringWriter;
@@ -37,13 +34,13 @@ public class ProcessFilesTest {
 			stringWriter.close();
 		}
 
-		assertTrue("Had: " + stringWriter.toString().replace("\n", "").substring(0, 200),
-				stringWriter.toString().contains("\"notexistingfile\""));
-		assertTrue("Had: " + stringWriter.toString().replace("\n", "").substring(0, 200),
-				stringWriter.toString().contains("\"exceptionText\":\"java.io.FileNotFoundException:"));
+		assertTrue(stringWriter.toString().contains("\"notexistingfile\""),
+				"Had: " + stringWriter.toString().replace("\n", "").substring(0, 200));
+		assertTrue(stringWriter.toString().contains("\"exceptionText\":\"java.io.FileNotFoundException:"),
+				"Had: " + stringWriter.toString().replace("\n", "").substring(0, 200));
 	}
 
-	@Ignore("Just a local test")
+	@Disabled("Just a local test")
 	@Test
 	public void testFileNullHandler() throws IOException {
 		stringWriter = new StringWriter();
@@ -55,13 +52,13 @@ public class ProcessFilesTest {
 			stringWriter.close();
 		}
 
-		assertTrue("Had: " + stringWriter.toString().replace("\n", ""),
-				stringWriter.toString().contains("\"scstatehouse.gov_getfile.php"));
-		assertFalse("Had: " + stringWriter.toString().replace("\n", ""),
-				stringWriter.toString().contains("\"exceptionText\":\"java.io.FileNotFoundException:"));
+		assertTrue(stringWriter.toString().contains("\"scstatehouse.gov_getfile.php"),
+				"Had: " + stringWriter.toString().replace("\n", ""));
+		assertFalse(stringWriter.toString().contains("\"exceptionText\":\"java.io.FileNotFoundException:"),
+				"Had: " + stringWriter.toString().replace("\n", ""));
 	}
 
-	@Ignore("Just a local test")
+	@Disabled("Just a local test")
 	@Test
 	public void testFileHandlingRunnable() throws IOException {
 		stringWriter = new StringWriter();
@@ -105,7 +102,7 @@ public class ProcessFilesTest {
 		assertNotNull(files);
 	}
 
-	@Ignore("Only used for local testing")
+	@Disabled("Only used for local testing")
 	@Test
 	public void testOneFile() throws Exception {
 		String file = "alfresco.vgregion.se_alfresco_service_vgr_storage_node_content_workspace_spacesstore_a1dc0dc0-b6f6-4890-8dc6-e4dd029764f1_tom_20fl_c3_b6desschema_20nytt.ppt_a=false&guest=true&native=true.ppt";
