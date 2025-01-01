@@ -17,7 +17,8 @@ public class DatabaseBase {
 
 	@AfterAll
 	public static void stopDB() {
-		assertTrue(starter.stop());
+		assertTrue(starter.stop(),
+				"Stopping database failed, look for log with message 'Unable to stop database management system'");
 
 		// With Gradle many tests are run in one VM, so we should not
 		// remove them here
