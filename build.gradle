@@ -33,7 +33,7 @@ configurations.configureEach {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.4.0'
+def poiVersion = '5.4.1-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
