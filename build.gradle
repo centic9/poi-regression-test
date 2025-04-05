@@ -86,9 +86,9 @@ configurations {
 dependencies {
     implementation 'org.dstadler:commons-dost:1.3.4'
     implementation 'org.dstadler:commoncrawldownload:1.0.0.7'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.18.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.1'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.18.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.18.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.18.3'
     implementation 'commons-io:commons-io:2.18.0'
     implementation 'org.apache.commons:commons-lang3:3.17.0'
     implementation 'org.apache.commons:commons-text:1.13.0'
@@ -97,7 +97,7 @@ dependencies {
 
     implementation 'org.apache.openjpa:openjpa:3.2.2'
     runtimeOnly 'org.apache.commons:commons-dbcp2:2.13.0'
-    runtimeOnly 'org.apache.commons:commons-pool2:2.12.0'
+    runtimeOnly 'org.apache.commons:commons-pool2:2.12.1'
     implementation 'org.apache.derby:derbynet:10.14.2.0'
     runtimeOnly 'org.apache.derby:derbyclient:10.14.2.0'
 
@@ -166,16 +166,16 @@ dependencies {
 
     // duplicate a few dependencies to not fail when the POI dependencies are updated
     implementation 'org.apache.commons:commons-compress:1.27.1'
-    implementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    implementation 'org.junit.jupiter:junit-jupiter:5.12.1'
     implementation 'com.zaxxer:SparseBitSet:1.3'
     implementation 'org.apache.xmlbeans:xmlbeans:5.3.0'
     implementation 'org.apache.logging.log4j:log4j-api:2.24.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.24.3'
     implementation 'com.github.virtuald:curvesapi:1.08'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.1'
     testImplementation 'org.apache.ant:ant:1.10.15'
     testImplementation 'org.dstadler:commons-test:1.0.0.21'
 
@@ -184,7 +184,7 @@ dependencies {
     // required for NullPrintStream for now
     poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
     // dependencies for the Integration-Test part
-    poiIntegrationTestImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
+    poiIntegrationTestImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.1'
     poiIntegrationTestImplementation 'org.apache.ant:ant:1.10.15'
 }
 
@@ -238,7 +238,7 @@ tasks.register('processFiles', JavaExec) {
             //'-XX:+PrintCompilation',
             '-XX:+PrintCodeCache',
             '-XX:ReservedCodeCacheSize=100m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             // to avoid having strange stacktraces with only the Exception-class
             '-XX:-OmitStackTraceInFastThrow',
             // required for JDK 9 to have stuff in javax.xml.bind available
@@ -287,7 +287,7 @@ tasks.register('processResults', JavaExec) {
 
     jvmArgs = [
             '-Xmx512m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
     ]
     args = [resultFile]
 
@@ -301,7 +301,7 @@ tasks.register('report', JavaExec) {
 
     jvmArgs = [
             '-Xmx512m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
     ]
 
     mainClass = 'org.dstadler.commoncrawl.Report'
@@ -320,7 +320,7 @@ tasks.register('deduplicate', JavaExec) {
 
     jvmArgs = [
             '-Xmx1024m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown'
     ]
 
     mainClass = 'org.dstadler.commoncrawl.Deduplicate'
@@ -335,7 +335,7 @@ tasks.register('exportToElasticsearchFromJSON', JavaExec) {
 
     jvmArgs = [
             '-Xmx2048m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
     ]
 
@@ -350,7 +350,7 @@ tasks.register('processResultsToCSV', JavaExec) {
 
     jvmArgs = [
             '-Xmx2048m',
-            '-javaagent:lib/file-leak-detector-1.19-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
+            '-javaagent:lib/file-leak-detector-1.20-SNAPSHOT-jar-with-dependencies.jar=http=0,strong,excludes=file-leak-detector.exclude,dumpatshutdown',
             '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/tmp'
     ]
 
