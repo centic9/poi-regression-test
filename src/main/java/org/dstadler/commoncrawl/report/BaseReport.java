@@ -1,6 +1,7 @@
 package org.dstadler.commoncrawl.report;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.archive.util.FileUtils;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.jpa.FileStatus;
@@ -52,6 +53,8 @@ public class BaseReport {
         if(!resultFile.getParentFile().exists() && !resultFile.getParentFile().mkdirs()) {
             throw new IllegalStateException("Could not create dir " + resultFile.getParentFile() + " for file " + resultFile);
         }
+
+        context.put("escapeUtils", StringEscapeUtils.class);
 
         VelocityUtils.render(context, "Report.vm", resultFile);
     }

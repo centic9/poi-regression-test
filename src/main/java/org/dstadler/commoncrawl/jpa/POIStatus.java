@@ -60,7 +60,8 @@ import com.google.common.base.Preconditions;
 		"exceptionStacktrace524RC1","exceptionText524RC1","poi524RC1",
 		"exceptionStacktrace525RC1","exceptionText525RC1","poi525RC1",
 		"exceptionStacktrace530RC1","exceptionText530RC1","poi530RC1",
-		"exceptionStacktrace540RC1","exceptionText540RC1","poi540RC1" })
+		"exceptionStacktrace540RC1","exceptionText540RC1","poi540RC1",
+		"exceptionStacktrace541RC1","exceptionText541RC1","poi541RC1" })
 @Entity
 public class POIStatus extends Base {
 	@JsonProperty
@@ -662,6 +663,24 @@ public class POIStatus extends Base {
 	@Basic
 	private long duration540RC1;
 
+	@JsonProperty
+	@Basic
+	private FileStatus poi541RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionText541RC1;
+
+	@JsonProperty
+	@Basic
+	@Column(length = FileURL.URL_MAX_LENGTH)
+	private String exceptionStacktrace541RC1;
+
+	@JsonProperty
+	@Basic
+	private long duration541RC1;
+
 	public POIStatus() {
 		super();
 	}
@@ -977,6 +996,14 @@ public class POIStatus extends Base {
 		this.poi540RC1 = poi540RC1;
 	}
 
+	public FileStatus getPoi541RC1() {
+		return poi541RC1;
+	}
+
+	public void setPoi541RC1(FileStatus poi541RC1) {
+		this.poi541RC1 = poi541RC1;
+	}
+
 	public void setByVersion(String version, ResultItem item) {
 		final FileStatus status;
 		if(item.isTimeout() ||
@@ -1168,6 +1195,11 @@ public class POIStatus extends Base {
 			exceptionText540RC1 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
 			exceptionStacktrace540RC1 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
 			duration540RC1 = item.getDuration();
+		} else if (version.contains("5.4.1-RC1")) {
+			this.poi541RC1 = status;
+			exceptionText541RC1 = StringUtils.abbreviate(item.getExceptionText(), FileURL.URL_MAX_LENGTH);
+			exceptionStacktrace541RC1 = StringUtils.abbreviate(item.getExceptionStacktrace(), FileURL.URL_MAX_LENGTH);
+			duration541RC1 = item.getDuration();
 		} else {
 			throw new IllegalStateException("Unknown version found: " + version);
 		}

@@ -81,8 +81,8 @@
     <div class="row">
         <div class="col-md-1">$item.count</div>
         <div class="col-md-1">$item.status $item.annotation</div>
-        <div class="col-md-4">$item.exception</div>
-        <div class="col-md-5"><pre>$item.stacktrace</pre></div>
+        <div class="col-md-4">$escapeUtils.escapeHtml4($item.exception)</div>
+        <div class="col-md-5"><pre>$escapeUtils.escapeHtml4($item.stacktrace)</pre></div>
         #if($copySampleFiles)
         <div class="col-md-1"><a href="$item.fileName">Download</a></div>
         #else
