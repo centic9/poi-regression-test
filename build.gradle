@@ -33,7 +33,7 @@ configurations.configureEach {
 }
 
 // this is the version of the jar-files of Apache POI that are used for testing
-def poiVersion = '5.4.1'
+def poiVersion = '5.4.2-SNAPSHOT'
 
 // this is the version that is used in the database for this run
 // make sure to update classes POIStatus and Report to handle this version correctly
@@ -127,12 +127,12 @@ dependencies {
     implementation files(poiDir + '/lib/main/SparseBitSet-1.3.jar')
     implementation files(poiDir + '/lib/main/log4j-api-2.24.3.jar')
     implementation files(poiDir + '/lib/main-tests/log4j-core-2.24.3.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-jupiter-api-5.12.0.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.12.0.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-jupiter-params-5.12.0.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-platform-commons-1.12.0.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.12.0.jar')
-    implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.12.0.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-api-5.12.2.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-engine-5.12.2.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-jupiter-params-5.12.2.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-commons-1.12.2.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-engine-1.12.2.jar')
+    implementation files(poiDir + '/lib/main-tests/junit-platform-launcher-1.12.2.jar')
     implementation files(poiDir + '/lib/main-tests/opentest4j-1.2.0.jar')
     implementation files(poiDir + '/lib/ooxml/commons-compress-1.27.1.jar')
     implementation files(poiDir + '/lib/ooxml/xmlbeans-5.3.0.jar')
@@ -166,16 +166,16 @@ dependencies {
 
     // duplicate a few dependencies to not fail when the POI dependencies are updated
     implementation 'org.apache.commons:commons-compress:1.27.1'
-    implementation 'org.junit.jupiter:junit-jupiter:5.12.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.12.2'
     implementation 'com.zaxxer:SparseBitSet:1.3'
     implementation 'org.apache.xmlbeans:xmlbeans:5.3.0'
     implementation 'org.apache.logging.log4j:log4j-api:2.24.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.24.3'
     implementation 'com.github.virtuald:curvesapi:1.08'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
     testImplementation 'org.apache.ant:ant:1.10.15'
     testImplementation 'org.dstadler:commons-test:1.0.0.21'
 
@@ -184,7 +184,7 @@ dependencies {
     // required for NullPrintStream for now
     poiIntegrationTestImplementation files(poiDir + '/build/dist/maven/poi-tests/poi-' + poiVersion + '-tests.jar')
     // dependencies for the Integration-Test part
-    poiIntegrationTestImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.1'
+    poiIntegrationTestImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
     poiIntegrationTestImplementation 'org.apache.ant:ant:1.10.15'
 }
 
