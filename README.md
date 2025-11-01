@@ -44,10 +44,11 @@ For Apache POI 5.1.0 and newer:
     cd /opt/poi
     ./gradlew jar :poi-integration:testJar
 
-Before 5.0.0, use `integration-test-jar`. Between 5.0.0 and 5.1.0, use `compile-integration 
+Before 5.0.0, use `integration-test-jar`. Between 5.0.0 and 5.1.0, use `compile-integration`
 
 ### Set up test
 
+* Adjust versions of libraries in `build.gradle`
 * Adjust available memory in `build.gradle`, look for task `processFiles` and set the main
 memory to what is available on your machine
 * Adjust available threads in `ProcessFiles.java`, adjust it relative to how you adjust main memory
