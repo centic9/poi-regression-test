@@ -2,14 +2,18 @@ package org.dstadler.commoncrawl.jpa;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.dstadler.commoncrawl.ResultItem;
 import org.dstadler.commons.testing.TestHelpers;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class POIStatusTest {
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
 	@Test
 	public void testSetByVersion() throws Exception {
@@ -159,4 +163,46 @@ public class POIStatusTest {
 		notequ = new POIStatus();
 		TestHelpers.EqualsTest(status, equ, notequ);
 	}
+
+    @Test
+    public void testSampleFile() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/sample.json"), 1024*1024)) {
+            String line = reader.readLine();
+            assertNotNull(line);
+
+            ResultItem item = ResultItem.parse(line);
+
+            POIStatus status = new POIStatus();
+            status.setFilename(item.getFileName());
+
+            status.setByVersion("result-5.5.0-5.5.0-RC1-2025-11-01-12-10.json", item);
+
+            assertEquals(FileStatus.TIMEOUT, status.getPoi550RC1());
+            String json = MAPPER.writeValueAsString(status);
+            assertTrue(json.contains("\"poi550RC1\":\"TIMEOUT\""),
+                    "Had: " + json);
+            assertTrue(json.contains("\"exceptionText550RC1\":null,"),
+                    "Had: " + json);
+
+            line = reader.readLine();
+            assertNotNull(line);
+
+            item = ResultItem.parse(line);
+
+            status = new POIStatus();
+            status.setFilename(item.getFileName());
+
+            status.setByVersion("result-5.5.0-5.5.0-RC1-2025-11-01-12-10.json", item);
+
+            assertEquals(FileStatus.TIMEOUT, status.getPoi550RC1());
+            json = MAPPER.writeValueAsString(status);
+            assertTrue(json.contains("\"poi550RC1\":\"TIMEOUT\""),
+                    "Had: " + json);
+            assertTrue(json.contains("\"exceptionText550RC1\":\"java.lang.ThreadDeath\","),
+                    "Had: " + json);
+
+            line = reader.readLine();
+            assertNull(line);
+        }
+    }
 }

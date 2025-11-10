@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 public enum FileStatus {
 	// set the number to order by "severity", i.e. errors first
 
+    // =====================================================================================================
+    // NOTE: The value used in the database is not "order", but ordinal, which is counted starting from top!
+
 	// processing was fine
 	OK(6),
 
