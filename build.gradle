@@ -40,7 +40,7 @@ if (!project.hasProperty('poiDir')) {
 def poiVersion = null
 new File(ext.poiDir + "/build.xml").eachLine{ line ->
     // look for <property name="version.id" value="5.5.0"/>
-    def findVersion = (line =~ /<property name="version.id" value="([\d.]+)"\/>/)
+    def findVersion = (line =~ /<property name="version.id" value="([\d.]+(?:-SNAPSHOT)?)"\/>/)
     if (findVersion.count == 1) {
         poiVersion = findVersion[0][1]
     }
