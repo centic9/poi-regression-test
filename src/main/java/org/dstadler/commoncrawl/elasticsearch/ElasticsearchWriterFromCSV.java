@@ -2,7 +2,7 @@ package org.dstadler.commoncrawl.elasticsearch;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commons.logging.jdk.LoggerFactory;
 

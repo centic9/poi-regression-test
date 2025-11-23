@@ -2,7 +2,7 @@ package org.dstadler.commoncrawl.elasticsearch;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commoncrawl.utils.ExportPOIStatus;
 import org.dstadler.commons.logging.jdk.LoggerFactory;

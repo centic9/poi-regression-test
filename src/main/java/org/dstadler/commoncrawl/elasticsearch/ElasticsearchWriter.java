@@ -11,7 +11,7 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseStarter;

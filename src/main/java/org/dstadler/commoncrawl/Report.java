@@ -1,6 +1,6 @@
 package org.dstadler.commoncrawl;
 
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseStarter;

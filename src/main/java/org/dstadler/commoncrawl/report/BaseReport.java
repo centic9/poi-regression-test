@@ -1,8 +1,8 @@
 package org.dstadler.commoncrawl.report;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.archive.util.FileUtils;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.jpa.FileStatus;
 import org.dstadler.commoncrawl.utils.VelocityUtils;

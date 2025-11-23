@@ -1,7 +1,7 @@
 package org.dstadler.commoncrawl.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseStarter;
@@ -14,9 +14,7 @@ import javax.persistence.TypedQuery;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 import org.apache.tools.ant.taskdefs.Move;
 import org.dstadler.commoncrawl.report.ReportItem;
 import org.dstadler.commoncrawl.jpa.FileStatus;
