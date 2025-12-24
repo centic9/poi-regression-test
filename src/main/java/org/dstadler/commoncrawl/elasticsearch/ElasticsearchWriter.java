@@ -134,7 +134,7 @@ public class ElasticsearchWriter {
     protected static void sendDocuments(String esHost, HttpClientWrapper httpClient, List<POIStatus> results) throws IOException, InterruptedException {
         StringBuilder data = new StringBuilder();
         for (POIStatus result : results) {
-            data.append("{ \"index\": { \"_index\": \"poiregression4\", \"_type\": \"status\", \"_id\": \"")
+            data.append("{ \"index\": { \"_index\": \"poiregression5\", \"_type\": \"status\", \"_id\": \"")
                     .append(StringEscapeUtils.escapeJson(sanitize(result.getFilename()))).append("\"}}\n")
                     .append(objectMapper.writeValueAsString(result)).append("\n");
 
