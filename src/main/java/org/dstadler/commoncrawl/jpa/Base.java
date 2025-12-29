@@ -2,7 +2,7 @@ package org.dstadler.commoncrawl.jpa;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
+import jakarta.persistence.Basic;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

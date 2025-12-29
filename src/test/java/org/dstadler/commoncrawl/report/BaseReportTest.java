@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.TypedQuery;
+import jakarta.persistence.TypedQuery;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;

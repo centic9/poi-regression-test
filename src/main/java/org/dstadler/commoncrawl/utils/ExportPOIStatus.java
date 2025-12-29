@@ -8,9 +8,9 @@ import org.dstadler.commoncrawl.datalayer.DatabaseStarter;
 import org.dstadler.commoncrawl.jpa.POIStatus;
 import org.dstadler.commons.logging.jdk.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;

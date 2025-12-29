@@ -45,8 +45,10 @@ public class ReportItemTest {
         assertEquals("filename", item.getFileName());
 
         item = new ReportItem(43, FileStatus.ERROR, "   org.apache.poi ",
-                "\tat org.apache.poi.stress.HWPFFileHandler.handleFile(HWPFFileHandler.java:32)\n" +
-                "\tat org.dstadler.commoncrawl.ProcessFiles$FileHandlingRunnable.run(ProcessFiles.java:220)\nabcd", "filename");
+                """
+                	at org.apache.poi.stress.HWPFFileHandler.handleFile(HWPFFileHandler.java:32)
+                	at org.dstadler.commoncrawl.ProcessFiles$FileHandlingRunnable.run(ProcessFiles.java:220)
+                abcd""", "filename");
         assertEquals(43, item.getCount());
         assertEquals(FileStatus.ERROR, item.getStatus());
         assertEquals("o.a.p", item.getException());
@@ -54,10 +56,12 @@ public class ReportItemTest {
         assertEquals("filename", item.getFileName());
 
         item = new ReportItem(43, FileStatus.ERROR, "   org.apache.poi ",
-                "\tat org.apache.poi.stress.HWPFFileHandler.handleFile(HWPFFileHandler.java:32)\n" +
-                "\tat org.apache.poi.BaseIntegrationTest.handleFile(BaseIntegrationTest.java:93)\n" +
-                "\tat org.apache.poi.BaseIntegrationTest.test(BaseIntegrationTest.java:42)\n" +
-                "\tat org.dstadler.commoncrawl.ProcessFiles$FileHandlingRunnable.run(ProcessFiles.java:220)\nabcd", "filename");
+                """
+                	at org.apache.poi.stress.HWPFFileHandler.handleFile(HWPFFileHandler.java:32)
+                	at org.apache.poi.BaseIntegrationTest.handleFile(BaseIntegrationTest.java:93)
+                	at org.apache.poi.BaseIntegrationTest.test(BaseIntegrationTest.java:42)
+                	at org.dstadler.commoncrawl.ProcessFiles$FileHandlingRunnable.run(ProcessFiles.java:220)
+                abcd""", "filename");
         assertEquals(43, item.getCount());
         assertEquals(FileStatus.ERROR, item.getStatus());
         assertEquals("o.a.p", item.getException());

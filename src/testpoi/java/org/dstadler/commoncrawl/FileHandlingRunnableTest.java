@@ -22,7 +22,7 @@ public class FileHandlingRunnableTest {
     public void testPrintInfo() {
         FileHandler handler = new OPCFileHandler();
         FileHandlingRunnable runnable = new FileHandlingRunnable(100, "testfile", handler, null, null);
-        runnable.printInfo(1, "some text");
+        runnable.printInfo(1, ", some text");
 
         runnable = new FileHandlingRunnable(System.currentTimeMillis()- TimeUnit.MINUTES.toMillis(3),
                 "testfile", handler, null, null);
@@ -30,7 +30,7 @@ public class FileHandlingRunnableTest {
         FileHandlingRunnable.filesCount = 12382823L;
         FileHandlingRunnable.ignored.set(2234);
         FileHandlingRunnable.failed.set(8326);
-        runnable.printInfo(2371623, "some text");
+        runnable.printInfo(2371623, ", some text");
     }
 
     @Test

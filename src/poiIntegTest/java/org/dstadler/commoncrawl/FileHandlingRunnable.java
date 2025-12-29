@@ -82,7 +82,7 @@ public final class FileHandlingRunnable implements Runnable {
         } catch (Throwable e) {
             failed.incrementAndGet();
             writeResult(resultWriter, file, e, false, -1);
-            printInfo(localCount, ", failure: " + e.toString());
+            printInfo(localCount, ", failure: " + e);
         }
     }
 
@@ -92,15 +92,13 @@ public final class FileHandlingRunnable implements Runnable {
         double countPerMinute = ((double)allCount)/diff*60;
         double remaining = filesCount-allCount;
 
-        System.out.println(String.format("%,d", localCount) + " done, " + String.format("%,d", ignored.get()) +
-                " ignored, thus " + String.format("%,d", allCount) + " of " + String.format("%,d", filesCount) + " done, " +
-                String.format("%,d", failed.get()) + " failed, " +
-                "took " + diff + " seconds (" + String.format("%.2f", ((double)diff)/60) + " minutes, " +
-                String.format("%.2f", ((double)diff)/60/60) + " hours), " + String.format("%.2f", countPerMinute) + " per minute, " +
-                String.format("%.2f", ((double)allCount)/filesCount*100) + "%, " +
-                "estimated remaining time: " + String.format("%.0f", remaining/countPerMinute) + " minutes, " +
-                "estimated finish at: " + DATE_FORMAT.format(DateUtils.addSeconds(new Date(), (int) (remaining*60/countPerMinute))) +
-                ", " + file + " using " + (fileHandler == null ? "<null>" : fileHandler.getClass().getSimpleName()) + info);
+        System.out.printf("%,d done, %,d ignored, thus %,d of %,d done, %,d failed, took %d seconds (%.2f minutes, " +
+            "%.2f hours), %.2f per minute, %.2f%%, estimated remaining time: %.0f minutes, " +
+            "estimated finish at: %s, %s using %s%s%n", localCount, ignored.get(), allCount, filesCount, failed.get(), diff,
+            ((double)diff) / 60, ((double)diff) / 60 / 60, countPerMinute, ((double)allCount) / filesCount * 100,
+            remaining / countPerMinute,
+            DATE_FORMAT.format(DateUtils.addSeconds(new Date(), (int) (remaining*60/countPerMinute))), file,
+            (fileHandler == null ? "<null>" : fileHandler.getClass().getSimpleName()), info);
 
         Optional<String> oldestFile = startTimes.keySet().stream().findFirst();
         long oldestStartTime = oldestFile.map(s -> {

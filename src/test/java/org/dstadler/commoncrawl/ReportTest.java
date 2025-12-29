@@ -102,11 +102,11 @@ public class ReportTest {
         List<ReportItem> items = getItems(1);
         List<ReportItem> newItems = Report.combineItems(items);
 
-        assertEquals(89, newItems.get(0).getCount());
+        assertEquals(89, newItems.getFirst().getCount());
         assertEquals(46, newItems.get(1).getCount());
         assertEquals(1, newItems.get(2).getCount());
 
-        assertEquals("some exception text", newItems.get(0).getException());
+        assertEquals("some exception text", newItems.getFirst().getException());
         assertEquals(StringUtils.repeat("some long exception text", 20), newItems.get(1).getException());
         assertEquals("only one", newItems.get(2).getException());
     }

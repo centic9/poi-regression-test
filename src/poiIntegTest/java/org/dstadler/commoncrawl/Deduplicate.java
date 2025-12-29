@@ -33,7 +33,7 @@ public class Deduplicate {
 
         //System.out.println("Having files with 2 bytes: " + sizes.get(2L));
         NavigableSet<Long> sizesKeys = sizes.keySet();
-        System.out.println("Having " + sizesKeys.size() + " different sizes between " + sizesKeys.first() + " and " + sizesKeys.last());
+        System.out.println("Having " + sizesKeys.size() + " different sizes between " + sizesKeys.getFirst() + " and " + sizesKeys.getLast());
 
         int duplicates = 0;
         int count = 0;
