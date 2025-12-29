@@ -4,19 +4,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.FileEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.FileEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.logging.log4j.LogManager;
 import org.dstadler.commoncrawl.datalayer.DataAccess;
 import org.dstadler.commoncrawl.datalayer.DataAccessFactory;
 import org.dstadler.commoncrawl.datalayer.DatabaseStarter;
 import org.dstadler.commoncrawl.jpa.POIStatus;
-import org.dstadler.commons.http.HttpClientWrapper;
+import org.dstadler.commons.http5.HttpClientWrapper5;
 import org.dstadler.commons.http.NanoHTTPD;
 import org.dstadler.commons.logging.jdk.LoggerFactory;
 
@@ -79,7 +80,7 @@ public class ElasticsearchWriter {
     }
 
     protected static void writeDocuments(Iterator<POIStatus> records, String esHost, String esUser, String esPassword) throws IOException, InterruptedException {
-        try (HttpClientWrapper httpClient = new HttpClientWrapper(esUser, esPassword, 60_000)) {
+        try (HttpClientWrapper5 httpClient = new HttpClientWrapper5(esUser, esPassword, 60_000)) {
             long position = 0;
             while(records.hasNext()) {
                 List<POIStatus> results = new ArrayList<>();
@@ -98,7 +99,7 @@ public class ElasticsearchWriter {
     }
 
     private static void writeDocuments(DataAccess access, String esHost, String esUser, String esPassword) throws IOException, InterruptedException {
-        try (HttpClientWrapper httpClient = new HttpClientWrapper(esUser, esPassword, 60_000)) {
+        try (HttpClientWrapper5 httpClient = new HttpClientWrapper5(esUser, esPassword, 60_000)) {
             CriteriaBuilder criteriaBuilder = access.getEm().getCriteriaBuilder();
 
             CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
@@ -131,7 +132,7 @@ public class ElasticsearchWriter {
     }
 
 
-    protected static void sendDocuments(String esHost, HttpClientWrapper httpClient, List<POIStatus> results) throws IOException, InterruptedException {
+    protected static void sendDocuments(String esHost, HttpClientWrapper5 httpClient, List<POIStatus> results) throws IOException, InterruptedException {
         StringBuilder data = new StringBuilder();
         for (POIStatus result : results) {
             data.append("{ \"index\": { \"_index\": \"poiregression5\", \"_type\": \"status\", \"_id\": \"")
@@ -155,7 +156,7 @@ public class ElasticsearchWriter {
         }
     }
 
-    protected static void sendDocumentWithRetry(String esHost, HttpClientWrapper httpClient, StringBuilder data) throws IOException, InterruptedException {
+    protected static void sendDocumentWithRetry(String esHost, HttpClientWrapper5 httpClient, StringBuilder data) throws IOException, InterruptedException {
         int retry = 3;
         while (true) {
             try {
@@ -190,22 +191,26 @@ public class ElasticsearchWriter {
     protected static void sendDocument(CloseableHttpClient httpClient, String url, String json) throws IOException {
         final HttpPut httpPut = new HttpPut(url);
         httpPut.addHeader("Content-Type", NanoHTTPD.MIME_JSON);
-        httpPut.setEntity(new StringEntity(json, "UTF-8"));
+        httpPut.setEntity(new StringEntity(json, StandardCharsets.UTF_8));
 
-        try (CloseableHttpResponse response = httpClient.execute(httpPut)) {
-            HttpEntity entity = HttpClientWrapper.checkAndFetch(response, url);
+        try {
+            httpClient.execute(httpPut, (HttpClientResponseHandler<Void>) response -> {
+                HttpEntity entity = HttpClientWrapper5.checkAndFetch(response, url);
 
-            try {
-                String result = IOUtils.toString(entity.getContent(), StandardCharsets.UTF_8);
-                log.info("Had result when sending document to Elasticsearch at " + url + "(" + json.length() + " chars): " +
-                        StringUtils.abbreviate(result, 1024) + ", JSON: " + StringUtils.abbreviate(json, 1024));
-                if(result.contains("\"errors\":true")) {
-                    throw new IOException("Failed to handle bulk: " + result);
+                try {
+                    String result = IOUtils.toString(entity.getContent(), StandardCharsets.UTF_8);
+                    log.info("Had result when sending document to Elasticsearch at " + url + "(" + json.length() + " chars): " +
+                            StringUtils.abbreviate(result, 1024) + ", JSON: " + StringUtils.abbreviate(json, 1024));
+                    if(result.contains("\"errors\":true")) {
+                        throw new IOException("Failed to handle bulk: " + result);
+                    }
+                } finally {
+                    // ensure all content is taken out to free resources
+                    EntityUtils.consume(entity);
                 }
-            } finally {
-                // ensure all content is taken out to free resources
-                EntityUtils.consume(entity);
-            }
+
+                return null;
+            });
         } catch (IOException e) {
             throw new IOException("With URL " + url + " and JSON: " + StringUtils.abbreviate(json, 1024), e);
         }
@@ -214,13 +219,13 @@ public class ElasticsearchWriter {
     protected static void setupTemplate(String esHost, String esUser, String esPassword) throws IOException {
         log.info("Updating template on host " + esHost + " and user: " + esUser);
 
-        try (HttpClientWrapper metrics = new HttpClientWrapper(esUser, esPassword, 60_000)) {
+        try (HttpClientWrapper5 metrics = new HttpClientWrapper5(esUser, esPassword, 60_000)) {
             String url = esHost + (esHost.endsWith("/") ? "" : "/") + "_template/template_poi";
             final HttpPut httpPut = new HttpPut(url);
             httpPut.addHeader("Content-Type", "application/json");
-            httpPut.setEntity(new FileEntity(new File("src/main/resources/indextemplate.json")));
-            try (CloseableHttpResponse response = metrics.getHttpClient().execute(httpPut)) {
-                HttpEntity entity = HttpClientWrapper.checkAndFetch(response, url);
+            httpPut.setEntity(new FileEntity(new File("src/main/resources/indextemplate.json"), ContentType.APPLICATION_JSON));
+            metrics.getHttpClient().execute(httpPut, (HttpClientResponseHandler<Void>) response -> {
+                HttpEntity entity = HttpClientWrapper5.checkAndFetch(response, url);
 
                 try {
                     log.info("Had result when setting index template at " + url + " in Elasticsearch: " + IOUtils.toString(entity.getContent(), StandardCharsets.UTF_8));
@@ -228,7 +233,9 @@ public class ElasticsearchWriter {
                     // ensure all content is taken out to free resources
                     EntityUtils.consume(entity);
                 }
-            }
+
+                return null;
+            });
         }
     }
 }

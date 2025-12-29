@@ -1,8 +1,7 @@
 package org.dstadler.commoncrawl.elasticsearch;
 
-import org.dstadler.commoncrawl.elasticsearch.ElasticsearchWriter;
 import org.dstadler.commoncrawl.jpa.POIStatus;
-import org.dstadler.commons.http.HttpClientWrapper;
+import org.dstadler.commons.http5.HttpClientWrapper5;
 import org.dstadler.commons.testing.MockRESTServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +33,7 @@ public class ElasticsearchWriterTest {
 
     @Test
     public void sendDocuments() throws IOException, InterruptedException {
-        try (HttpClientWrapper httpClient = new HttpClientWrapper("", null, 60_000)) {
+        try (HttpClientWrapper5 httpClient = new HttpClientWrapper5("", null, 60_000)) {
             POIStatus o = new POIStatus();
             o.setFilename("test");
             ElasticsearchWriter.sendDocuments("http://localhost:" + server.getPort() + "/",
@@ -45,7 +44,7 @@ public class ElasticsearchWriterTest {
 
     @Test
     public void sendDocumentWithRetry() throws IOException, InterruptedException {
-        try (HttpClientWrapper httpClient = new HttpClientWrapper("", null, 60_000)) {
+        try (HttpClientWrapper5 httpClient = new HttpClientWrapper5("", null, 60_000)) {
             ElasticsearchWriter.sendDocumentWithRetry("http://localhost:" + server.getPort() + "/",
                     httpClient, new StringBuilder("{}"));
             assertEquals(1, called.get());
@@ -63,7 +62,7 @@ public class ElasticsearchWriterTest {
 
     @Test
     public void sendDocument() throws IOException {
-        try (HttpClientWrapper httpClient = new HttpClientWrapper("", null, 60_000)) {
+        try (HttpClientWrapper5 httpClient = new HttpClientWrapper5("", null, 60_000)) {
             ElasticsearchWriter.sendDocument(httpClient.getHttpClient(), "http://localhost:" + server.getPort(), "{}");
             assertEquals(1, called.get());
         }
