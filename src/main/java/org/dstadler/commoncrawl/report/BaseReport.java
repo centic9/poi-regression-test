@@ -8,7 +8,7 @@ import org.dstadler.commoncrawl.jpa.FileStatus;
 import org.dstadler.commoncrawl.utils.VelocityUtils;
 import org.dstadler.commons.logging.jdk.LoggerFactory;
 
-import javax.persistence.Query;
+import jakarta.persistence.Query;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
