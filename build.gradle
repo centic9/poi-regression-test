@@ -108,8 +108,8 @@ dependencies {
     implementation 'org.apache.openjpa:openjpa:4.1.1'
     runtimeOnly 'org.apache.commons:commons-dbcp2:2.14.0'
     runtimeOnly 'org.apache.commons:commons-pool2:2.13.0'
-    implementation 'org.apache.derby:derbynet:10.16.1.1'
-    runtimeOnly 'org.apache.derby:derbyclient:10.16.1.1'
+    implementation 'org.apache.derby:derbynet:10.17.1.0'
+    runtimeOnly 'org.apache.derby:derbyclient:10.17.1.0'
 
     // use the desired version of POI
 
