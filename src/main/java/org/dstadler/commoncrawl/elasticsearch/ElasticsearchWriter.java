@@ -88,7 +88,7 @@ public class ElasticsearchWriter {
                     results.add(records.next());
                 }
 
-                log.info(String.format("Handling %d results starting at %d",
+                log.info("Handling %d results starting at %d".formatted(
                         results.size(), position));
 
                 sendDocuments(esHost, httpClient, results);
@@ -121,7 +121,7 @@ public class ElasticsearchWriter {
 
                 List<POIStatus> results = typedQuery.getResultList();
 
-                log.info(String.format("Handling %d results starting at %d of %d items overall, %.4f percent done",
+                log.info("Handling %d results starting at %d of %d items overall, %.4f percent done".formatted(
                         results.size(), pagePosition, count, ((double)pagePosition)/count));
 
                 sendDocuments(esHost, httpClient, results);
@@ -224,6 +224,7 @@ public class ElasticsearchWriter {
             final HttpPut httpPut = new HttpPut(url);
             httpPut.addHeader("Content-Type", "application/json");
             httpPut.setEntity(new FileEntity(new File("src/main/resources/indextemplate.json"), ContentType.APPLICATION_JSON));
+
             metrics.getHttpClient().execute(httpPut, (HttpClientResponseHandler<Void>) response -> {
                 HttpEntity entity = HttpClientWrapper5.checkAndFetch(response, url);
 

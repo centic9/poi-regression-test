@@ -126,7 +126,7 @@ public class BaseReport {
                     ", sample-file: " + fileName);
 
             items.add(new OverviewItem(count, poiBefore, poiNow, fileName,
-                    String.format("%.2f", ((double)100)*count/(Long)context.get("statusCount"))));
+                    "%.2f".formatted(((double)100) * count / (Long)context.get("statusCount"))));
 
             if(copySampleFiles) {
                 copySampleFile(REPORT_DIR, fileName);
@@ -155,7 +155,7 @@ public class BaseReport {
                     ", sample-file: " + fileName);
 
             items.add(new OverviewItem(count, null, poiNow, fileName,
-                    String.format("%.2f", ((double)100)*count/(Long)context.get("statusCount"))));
+                    "%.2f".formatted(((double)100) * count / (Long)context.get("statusCount"))));
 
             if(copySampleFiles) {
                 copySampleFile(REPORT_DIR_ALL, fileName);
