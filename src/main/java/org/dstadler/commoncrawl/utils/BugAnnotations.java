@@ -148,6 +148,8 @@ public class BugAnnotations {
                 "java.io.IOException: The text piece table is corrupted, expected byte value * but had *");
         REPLACEMENTS.put(Pattern.compile("org.opentest4j.TestAbortedException: Assumption failed: File .* excluded because it is password-encrypted"),
                 "org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is password-encrypted");
+        REPLACEMENTS.put(Pattern.compile("java.lang.IllegalStateException: Failed to evaluate cell: .*?, value: .*"),
+                "java.lang.IllegalStateException: Failed to evaluate cell: *, value: *");
     }
 
     public static String getReplacement(String exception) {

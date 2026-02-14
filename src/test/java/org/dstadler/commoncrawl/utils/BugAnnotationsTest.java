@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BugAnnotationsTest {
 
@@ -178,6 +180,10 @@ public class BugAnnotationsTest {
 
         replacement = BugAnnotations.getReplacement("org.opentest4j.TestAbortedException: Assumption failed: File download.oldindex/ar.gov.ttn.www_normas_descargas_Planilla_Valores_Venales.xls excluded because it is password-encrypted");
         assertEquals("org.opentest4j.TestAbortedException: Assumption failed: File * excluded because it is password-encrypted",
+                replacement);
+
+        replacement = BugAnnotations.getReplacement("java.lang.IllegalStateException: Failed to evaluate cell: 'Cumulative Defaults (2)'!B7, value: B6+'Collateral Tables '!E9/350000000");
+        assertEquals("java.lang.IllegalStateException: Failed to evaluate cell: *, value: *",
                 replacement);
     }
 
